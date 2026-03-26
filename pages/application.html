@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — The Sovereignty Collective</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#FAF7F2;
+  --sand:#E8DFD0;
+  --sand-mid:#D4C5AE;
+  --clay:#B8A48C;
+  --clay-dark:#8C7A62;
+  --gold:#C9A96E;
+  --gold-light:#E8D5A8;
+  --warm-dark:#2A2318;
+  --warm-mid:#3D3226;
+  --text:#4A3F30;
+  --text-muted:#7A6E5F;
+  --text-faint:#A89E8E;
+  --error:#C0392B;
+  --success:#2E7D52;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--ivory);
+  color:var(--text);
+  font-weight:300;
+  line-height:1.7;
+  min-height:100vh;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 6vw;
+  background:rgba(250,247,242,0.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.logo-text{
+  font-family:'Cormorant',serif;font-size:1.1rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--warm-dark);text-decoration:none;
+}
+.logo-text span{color:var(--gold)}
+.nav-back{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text-muted);text-decoration:none;
+  transition:color .25s;font-weight:400;
+}
+.nav-back:hover{color:var(--warm-dark)}
+.nav-back svg{transition:transform .25s}
+.nav-back:hover svg{transform:translateX(-3px)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+
+/* ── LANG ── */
+.lang-switcher{display:flex;align-items:center;gap:.5rem}
+.lang-btn{
+  width:26px;height:26px;border-radius:50%;
+  border:1.5px solid transparent;cursor:pointer;
+  padding:0;background:none;
+  transition:border-color .25s,transform .2s,opacity .25s;
+  opacity:.45;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.lang-btn svg{pointer-events:none;display:block;border-radius:50%}
+.lang-btn.active{border-color:var(--gold);opacity:1;transform:scale(1.12)}
+.lang-btn:not(.active):hover{opacity:.8;transform:scale(1.08)}
+
+/* ── PAGE LAYOUT ── */
+.page-wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding:9rem 6vw 6rem;
+}
+
+/* ── HEADER ── */
+.page-header{text-align:center;margin-bottom:4rem}
+.page-eyebrow{
+  font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;display:block;font-weight:400;
+}
+.page-header h1{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:300;line-height:1.1;
+  color:var(--warm-dark);margin-bottom:.8rem;
+}
+.page-header h1 em{font-style:italic;color:var(--clay-dark)}
+.header-divider{
+  width:40px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:1.2rem auto;
+}
+.page-header p{
+  font-size:.92rem;color:var(--text-muted);
+  max-width:520px;margin:0 auto;line-height:1.9;
+}
+
+/* ── TIER SELECTOR ── */
+.tier-select-label{
+  font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;display:block;font-weight:400;
+}
+.tier-options{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1rem;margin-bottom:3rem;
+}
+.tier-opt{
+  border:1px solid var(--sand-mid);
+  padding:1.5rem;cursor:pointer;
+  transition:border-color .25s,background .25s;
+  position:relative;
+}
+.tier-opt:hover{border-color:var(--gold)}
+.tier-opt.selected{
+  border-color:var(--gold);
+  background:rgba(201,169,110,.06);
+}
+.tier-opt.selected::after{
+  content:'';
+  position:absolute;top:.7rem;right:.7rem;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+}
+.tier-opt-badge{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.6rem;display:block;font-weight:400;
+}
+.tier-opt h4{
+  font-family:'Cormorant',serif;
+  font-size:1.1rem;font-weight:400;
+  color:var(--warm-dark);margin-bottom:.3rem;
+}
+.tier-opt p{font-size:.78rem;color:var(--text-muted);line-height:1.6}
+.tier-opt-price{
+  font-family:'Cormorant',serif;
+  font-size:1rem;color:var(--clay-dark);
+  margin-top:.7rem;display:block;font-weight:400;
+}
+
+/* ── FORM ── */
+.form-section{margin-bottom:3rem}
+.form-section-title{
+  font-family:'Cormorant',serif;
+  font-size:1.3rem;font-weight:400;
+  color:var(--warm-dark);
+  margin-bottom:.3rem;
+}
+.form-section-sub{
+  font-size:.82rem;color:var(--text-muted);
+  margin-bottom:1.8rem;line-height:1.7;
+}
+.form-section-divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  margin-bottom:1.8rem;
+}
+.field{margin-bottom:1.6rem}
+.field label{
+  display:block;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--clay-dark);margin-bottom:.55rem;font-weight:400;
+}
+.field label .req{color:var(--gold);margin-left:.2rem}
+.field input:not([type=radio]):not([type=checkbox]),
+.field select,
+.field textarea{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--sand-mid);
+  padding:.6rem 0;
+  font-family:'Jost',sans-serif;
+  font-size:.9rem;font-weight:300;
+  color:var(--text);
+  outline:none;
+  transition:border-color .25s;
+  appearance:none;
+  -webkit-appearance:none;
+  border-radius:0;
+}
+.field select{
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8A48C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right center;
+  padding-right:1.5rem;cursor:pointer;
+}
+.field input:not([type=radio]):not([type=checkbox]):focus,
+.field select:focus,
+.field textarea:focus{
+  border-bottom-color:var(--gold);
+}
+.field textarea{
+  resize:vertical;min-height:110px;line-height:1.7;
+  border:1px solid var(--sand-mid);
+  padding:.8rem;border-radius:0;
+  transition:border-color .25s;
+}
+.field textarea:focus{border-color:var(--gold)}
+.field input::placeholder,.field textarea::placeholder{
+  color:var(--text-faint);font-style:italic;
+}
+.field-hint{
+  font-size:.75rem;color:var(--text-faint);
+  margin-top:.4rem;line-height:1.6;font-style:italic;
+}
+.field-error{
+  font-size:.75rem;color:var(--error);
+  margin-top:.4rem;display:none;
+}
+.field.has-error input:not([type=radio]):not([type=checkbox]),
+.field.has-error textarea,
+.field.has-error select{border-color:var(--error)}
+.field.has-error .field-error{display:block}
+
+/* radio group */
+.radio-group{display:flex;flex-direction:column;gap:.7rem;margin-top:.3rem}
+.radio-opt{
+  display:flex;align-items:flex-start;gap:.8rem;
+  cursor:pointer;
+}
+.radio-opt input[type=radio]{
+  width:16px;height:16px;
+  flex-shrink:0;margin-top:.18rem;
+  cursor:pointer;
+  accent-color:var(--gold);
+  appearance:auto;
+  -webkit-appearance:radio;
+  border:none;border-bottom:none;
+  padding:0;background:none;
+  outline:none;
+}
+.radio-opt span{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+
+/* checkbox */
+.checkbox-wrap{
+  display:flex;align-items:flex-start;gap:.8rem;
+  margin-top:1rem;
+}
+.checkbox-wrap input[type=checkbox]{
+  width:16px;height:16px;
+  flex-shrink:0;margin-top:.22rem;
+  cursor:pointer;
+  accent-color:var(--gold);
+  appearance:auto;
+  -webkit-appearance:checkbox;
+  border:none;border-bottom:none;
+  padding:0;background:none;
+  outline:none;
+}
+.checkbox-wrap span{
+  font-size:.83rem;color:var(--text-muted);line-height:1.7;
+}
+.checkbox-wrap a{color:var(--clay-dark);text-decoration:underline;text-underline-offset:2px}
+
+/* ── NOTICE BOX ── */
+.notice{
+  border:1px solid rgba(201,169,110,.3);
+  background:rgba(201,169,110,.06);
+  padding:1.4rem 1.6rem;
+  margin-bottom:2.5rem;
+}
+.notice p{
+  font-size:.84rem;color:var(--text-muted);
+  line-height:1.85;font-style:italic;
+}
+.notice strong{font-style:normal;color:var(--warm-dark);font-weight:400}
+
+/* ── SUBMIT ── */
+.submit-area{text-align:center;padding-top:1rem}
+.btn-submit{
+  display:inline-block;
+  font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--warm-dark);color:var(--gold-light);
+  padding:1rem 3rem;border:none;
+  font-family:'Jost',sans-serif;font-weight:400;
+  cursor:pointer;
+  transition:background .3s,transform .2s,box-shadow .3s;
+  box-shadow:0 6px 32px rgba(42,35,24,.16);
+}
+.btn-submit:hover{background:var(--clay-dark);transform:translateY(-2px);box-shadow:0 12px 40px rgba(42,35,24,.22)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.submit-note{
+  font-size:.72rem;color:var(--text-faint);
+  margin-top:1rem;letter-spacing:.05em;
+}
+
+/* ── SUCCESS STATE ── */
+.success-screen{
+  display:none;
+  text-align:center;
+  padding:5rem 2rem;
+}
+.success-screen.show{display:block}
+.success-icon{
+  width:60px;height:60px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 2rem;
+}
+.success-screen h2{
+  font-family:'Cormorant',serif;
+  font-size:2.2rem;font-weight:300;
+  color:var(--warm-dark);margin-bottom:1rem;
+}
+.success-screen h2 em{font-style:italic;color:var(--clay-dark)}
+.success-screen p{
+  font-size:.92rem;color:var(--text-muted);
+  max-width:480px;margin:0 auto 1.5rem;line-height:1.9;
+}
+.success-note{
+  font-size:.75rem;color:var(--text-faint);
+  font-style:italic;margin-top:2rem;
+}
+
+/* ── PROGRESS INDICATOR ── */
+.progress-bar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:2px;background:rgba(201,169,110,.15);
+}
+.progress-fill{
+  height:100%;background:var(--gold);
+  transition:width .4s ease;width:0%;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid rgba(201,169,110,.15);
+  padding:2rem 6vw;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:4rem;
+}
+.footer-tagline{
+  font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--clay);
+}
+.footer-back{
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-muted);text-decoration:none;
+  transition:color .25s;
+}
+.footer-back:hover{color:var(--warm-dark)}
+
+@media(max-width:600px){
+  .tier-options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-text" href="../index.html"><span>T</span>he Sovereignty Collective</a>
+  <div class="nav-right">
+    <a class="nav-back" href="../index.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span id="nav-back-txt">Back</span>
+    </a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-en" title="English">
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;border-radius:50%">
+          <clipPath id="cen"><circle cx="11" cy="11" r="11"/></clipPath>
+          <g clip-path="url(#cen)">
+            <rect width="22" height="22" fill="#B22234"/>
+            <rect y="1.69" width="22" height="1.69" fill="#fff"/><rect y="5.08" width="22" height="1.69" fill="#fff"/>
+            <rect y="8.46" width="22" height="1.69" fill="#fff"/><rect y="11.85" width="22" height="1.69" fill="#fff"/>
+            <rect y="15.23" width="22" height="1.69" fill="#fff"/><rect y="18.62" width="22" height="1.69" fill="#fff"/>
+            <rect width="9.5" height="11.85" fill="#3C3B6E"/>
+            <g fill="#fff"><circle cx="1.2" cy="1.1" r=".7"/><circle cx="2.8" cy="1.1" r=".7"/><circle cx="4.4" cy="1.1" r=".7"/><circle cx="6" cy="1.1" r=".7"/><circle cx="7.6" cy="1.1" r=".7"/><circle cx="9.2" cy="1.1" r=".7"/><circle cx="2" cy="2.5" r=".7"/><circle cx="3.6" cy="2.5" r=".7"/><circle cx="5.2" cy="2.5" r=".7"/><circle cx="6.8" cy="2.5" r=".7"/><circle cx="8.4" cy="2.5" r=".7"/><circle cx="1.2" cy="3.9" r=".7"/><circle cx="2.8" cy="3.9" r=".7"/><circle cx="4.4" cy="3.9" r=".7"/><circle cx="6" cy="3.9" r=".7"/><circle cx="7.6" cy="3.9" r=".7"/><circle cx="9.2" cy="3.9" r=".7"/><circle cx="2" cy="5.3" r=".7"/><circle cx="3.6" cy="5.3" r=".7"/><circle cx="5.2" cy="5.3" r=".7"/><circle cx="6.8" cy="5.3" r=".7"/><circle cx="8.4" cy="5.3" r=".7"/><circle cx="1.2" cy="6.7" r=".7"/><circle cx="2.8" cy="6.7" r=".7"/><circle cx="4.4" cy="6.7" r=".7"/><circle cx="6" cy="6.7" r=".7"/><circle cx="7.6" cy="6.7" r=".7"/><circle cx="9.2" cy="6.7" r=".7"/><circle cx="2" cy="8.1" r=".7"/><circle cx="3.6" cy="8.1" r=".7"/><circle cx="5.2" cy="8.1" r=".7"/><circle cx="6.8" cy="8.1" r=".7"/><circle cx="8.4" cy="8.1" r=".7"/><circle cx="1.2" cy="9.5" r=".7"/><circle cx="2.8" cy="9.5" r=".7"/><circle cx="4.4" cy="9.5" r=".7"/><circle cx="6" cy="9.5" r=".7"/><circle cx="7.6" cy="9.5" r=".7"/><circle cx="9.2" cy="9.5" r=".7"/></g>
+          </g>
+        </svg>
+      </button>
+      <button class="lang-btn" id="btn-pt" title="Português">
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;border-radius:50%">
+          <clipPath id="cbr"><circle cx="11" cy="11" r="11"/></clipPath>
+          <g clip-path="url(#cbr)">
+            <rect width="22" height="22" fill="#009C3B"/>
+            <polygon points="11,2 21,11 11,20 1,11" fill="#FEDF00"/>
+            <circle cx="11" cy="11" r="4.2" fill="#002776"/>
+            <path d="M7.2,9.8 Q11,8 14.8,9.8" stroke="#fff" stroke-width=".7" fill="none"/>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="page-wrap">
+
+  <!-- FORM PANEL -->
+  <div id="formPanel">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <span class="page-eyebrow" id="hdr-eyebrow">The Sovereignty Collective — Application</span>
+      <h1 id="hdr-h1">Submit your<br><em>application.</em></h1>
+      <div class="header-divider"></div>
+      <p id="hdr-desc">Applications are reviewed. Invitations are extended selectively. Read each question carefully — your answers determine fit, not performance.</p>
+    </header>
+
+    <!-- FORM -->
+    <form id="appForm" novalidate>
+
+      <!-- TIER SELECTION -->
+      <div class="form-section">
+        <span class="tier-select-label" id="tier-label">Which container are you applying for?</span>
+        <div class="tier-options">
+          <div class="tier-opt" data-tier="foundational" onclick="selectTier(this)">
+            <span class="tier-opt-badge" id="t1-badge">Tier I · Foundational</span>
+            <h4 id="t1-name">Foundational Integration Track</h4>
+            <p id="t1-desc">6 weeks · Regulation capacity building · Readiness pathway</p>
+            <span class="tier-opt-price" id="t1-price">$1,500</span>
+          </div>
+          <div class="tier-opt" data-tier="lab" onclick="selectTier(this)">
+            <span class="tier-opt-badge" id="t2-badge">Tier II · Elite Immersive</span>
+            <h4 id="t2-name">Identity Recalibration Lab</h4>
+            <p id="t2-desc">8 weeks · Live recalibration · Application & invitation only</p>
+            <span class="tier-opt-price" id="t2-price">$4,500 – $6,000</span>
+          </div>
+        </div>
+        <input type="hidden" id="selectedTier" name="tier" value="">
+      </div>
+
+      <!-- SECTION 1: PERSONAL -->
+      <div class="form-section">
+        <h3 class="form-section-title" id="s1-title">Personal Information</h3>
+        <p class="form-section-sub" id="s1-sub">Basic contact details. Shared only with Angie Martin.</p>
+        <div class="form-section-divider"></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div class="field">
+            <label for="fname" id="lbl-fname">First name <span class="req">*</span></label>
+            <input type="text" id="fname" name="firstName" placeholder="Your first name" autocomplete="given-name">
+            <span class="field-error" id="err-fname">Required</span>
+          </div>
+          <div class="field">
+            <label for="lname" id="lbl-lname">Last name <span class="req">*</span></label>
+            <input type="text" id="lname" name="lastName" placeholder="Your last name" autocomplete="family-name">
+            <span class="field-error" id="err-lname">Required</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email" id="lbl-email">Email address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+          <span class="field-error" id="err-email">Enter a valid email</span>
+        </div>
+
+        <div class="field">
+          <label for="location" id="lbl-location">City / Country</label>
+          <input type="text" id="location" name="location" placeholder="e.g. São Paulo, Brazil">
+        </div>
+
+        <div class="field">
+          <label for="context" id="lbl-context">Primary context of application <span class="req">*</span></label>
+          <select id="context" name="context">
+            <option value="" id="ctx-default">— Select one —</option>
+            <option value="personal" id="ctx-personal">Personal growth & inner work</option>
+            <option value="professional" id="ctx-professional">Professional evolution & leadership</option>
+            <option value="both" id="ctx-both">Both — personal and professional</option>
+          </select>
+          <span class="field-error" id="err-context">Please select one</span>
+        </div>
+      </div>
+
+      <!-- SECTION 2: READINESS -->
+      <div class="form-section">
+        <h3 class="form-section-title" id="s2-title">Readiness Assessment</h3>
+        <p class="form-section-sub" id="s2-sub">These questions assess nervous system stability and self-responsibility. Answer with precision — not performance.</p>
+        <div class="form-section-divider"></div>
+
+        <div class="field">
+          <label for="q1" id="lbl-q1">What recurring emotional reactions are you no longer willing to tolerate in yourself? <span class="req">*</span></label>
+          <textarea id="q1" name="q1" placeholder="Be specific. Name the patterns, not just the feelings."></textarea>
+          <span class="field-hint" id="hint-q1">No need to explain why — just describe what you observe.</span>
+          <span class="field-error" id="err-q1">Please answer this question</span>
+        </div>
+
+        <div class="field">
+          <label for="q2" id="lbl-q2">Describe a recent moment where you reacted in a way that did not reflect who you believe yourself to be. <span class="req">*</span></label>
+          <textarea id="q2" name="q2" placeholder="What happened? What did you notice? What followed?"></textarea>
+          <span class="field-error" id="err-q2">Please answer this question</span>
+        </div>
+
+        <div class="field">
+          <label for="q3" id="lbl-q3">What personal development work have you already engaged in — and what has shifted, and what has remained unresolved? <span class="req">*</span></label>
+          <textarea id="q3" name="q3" placeholder="Courses, therapy, coaching, books, practices — be specific about results."></textarea>
+          <span class="field-error" id="err-q3">Please answer this question</span>
+        </div>
+      </div>
+
+      <!-- SECTION 3: SELF-ASSESSMENT -->
+      <div class="form-section">
+        <h3 class="form-section-title" id="s3-title">Self-Assessment</h3>
+        <p class="form-section-sub" id="s3-sub">Answer honestly. There are no correct answers — only accurate ones.</p>
+        <div class="form-section-divider"></div>
+
+        <div class="field">
+          <label id="lbl-q4">When challenged or disagreed with, you tend to: <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="q4" value="defend"><span id="r4a">Defend my position immediately</span></label>
+            <label class="radio-opt"><input type="radio" name="q4" value="withdraw"><span id="r4b">Withdraw and process alone</span></label>
+            <label class="radio-opt"><input type="radio" name="q4" value="engage"><span id="r4c">Pause, then engage with curiosity</span></label>
+            <label class="radio-opt"><input type="radio" name="q4" value="varies"><span id="r4d">It varies significantly by context</span></label>
+          </div>
+          <span class="field-error" id="err-q4">Please select one</span>
+        </div>
+
+        <div class="field">
+          <label id="lbl-q5">How do you relate to structure and accountability? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="q5" value="thrive"><span id="r5a">I thrive with clear structure and high expectations</span></label>
+            <label class="radio-opt"><input type="radio" name="q5" value="resist"><span id="r5b">I often resist structure even when I know it would help</span></label>
+            <label class="radio-opt"><input type="radio" name="q5" value="learning"><span id="r5c">I'm actively building my capacity for self-accountability</span></label>
+          </div>
+          <span class="field-error" id="err-q5">Please select one</span>
+        </div>
+
+        <div class="field">
+          <label for="q6" id="lbl-q6">Why do you believe you are ready for immersive recalibration — at this specific point in your life? <span class="req">*</span></label>
+          <textarea id="q6" name="q6" placeholder="Not why you want it — why you are ready for it."></textarea>
+          <span class="field-hint" id="hint-q6">Readiness and desire are different. Reflect on both.</span>
+          <span class="field-error" id="err-q6">Please answer this question</span>
+        </div>
+      </div>
+
+      <!-- SECTION 4: COMMITMENT -->
+      <div class="form-section">
+        <h3 class="form-section-title" id="s4-title">Commitment & Standards</h3>
+        <p class="form-section-sub" id="s4-sub">This container requires more than interest. It requires readiness to be held to a standard.</p>
+        <div class="form-section-divider"></div>
+
+        <div class="field">
+          <label id="lbl-q7">Are you willing to be interrupted in your patterns in real time, during live sessions? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="q7" value="yes"><span id="r7a">Yes — that is precisely what I need</span></label>
+            <label class="radio-opt"><input type="radio" name="q7" value="unsure"><span id="r7b">I believe so, though I recognize I may resist at first</span></label>
+            <label class="radio-opt"><input type="radio" name="q7" value="no"><span id="r7c">I'm not sure I'm ready for that level of directness</span></label>
+          </div>
+          <span class="field-error" id="err-q7">Please select one</span>
+        </div>
+
+        <div class="notice">
+          <p id="notice-txt">This Lab is selective and structured. If you are not invited at this time, you will be encouraged to reapply for a future cohort or offered a place in the Foundational Integration Track. <strong>Are you open to this possibility?</strong></p>
+        </div>
+
+        <div class="field">
+          <label id="lbl-q8">If not invited at this time, you are open to: <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="q8" value="reapply"><span id="r8a">Reapplying for a future cohort</span></label>
+            <label class="radio-opt"><input type="radio" name="q8" value="foundational"><span id="r8b">Beginning with the Foundational Track as a readiness pathway</span></label>
+            <label class="radio-opt"><input type="radio" name="q8" value="both"><span id="r8c">Both options, depending on the recommendation</span></label>
+          </div>
+          <span class="field-error" id="err-q8">Please select one</span>
+        </div>
+
+        <div class="field">
+          <label for="anything" id="lbl-anything">Is there anything else you want Angie to know before reviewing your application?</label>
+          <textarea id="anything" name="anything" placeholder="Optional — share only what is genuinely relevant."></textarea>
+        </div>
+
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="confirm" name="confirm">
+          <span id="lbl-confirm">I understand this is not a purchase — it is an application. I accept that an invitation is extended at the discretion of The Sovereignty Collective, and that submission does not guarantee placement.</span>
+        </div>
+        <span class="field-error" id="err-confirm" style="margin-left:1.6rem;margin-top:.3rem">You must confirm before submitting</span>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-area">
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="submit-txt">Submit Application</span>
+        </button>
+        <p class="submit-note" id="submit-note">Your application will be reviewed within 5–7 business days. No payment is required at this stage.</p>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M6 13l5 5 9-9" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2 id="suc-h2">Application<br><em>received.</em></h2>
+    <p id="suc-p1">Your application has been submitted and will be reviewed carefully. We do not rush this process — depth requires attention.</p>
+    <p id="suc-p2">You will receive a response within <strong>5–7 business days</strong>. If invited, you will receive full details regarding the container, investment structure, and next steps.</p>
+    <div class="header-divider" style="margin:2rem auto"></div>
+    <p class="success-note" id="suc-note">The Sovereignty Collective does not chase. If this is your time, we will meet you there.</p>
+    <br><br>
+    <a href="../index.html" style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay-dark);text-decoration:none;border-bottom:1px solid rgba(140,122,98,.3);padding-bottom:.2rem" id="suc-back">Return to the Collective</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a href="../index.html" class="footer-back" id="ft-back">← Back to The Sovereignty Collective</a>
+  <span class="footer-tagline" id="ft-tag">Psychological clarity · Emotional power · Spiritual sovereignty</span>
+</footer>
+
+<script>
+// ── PROGRESS BAR ──
+function updateProgress(){
+  const fields = document.querySelectorAll('input[required],textarea[required],select[required]');
+  const requiredTextareas = ['q1','q2','q3','q6'];
+  let filled = 0, total = 0;
+
+  // Count tier selection
+  total++;
+  if(document.getElementById('selectedTier').value) filled++;
+
+  // Count text inputs
+  ['fname','lname','email'].forEach(id=>{
+    total++;
+    if(document.getElementById(id).value.trim()) filled++;
+  });
+
+  // Context select
+  total++;
+  if(document.getElementById('context').value) filled++;
+
+  // Textareas
+  requiredTextareas.forEach(id=>{
+    total++;
+    if(document.getElementById(id).value.trim().length > 20) filled++;
+  });
+
+  // Radio groups
+  ['q4','q5','q7','q8'].forEach(name=>{
+    total++;
+    if(document.querySelector(`input[name="${name}"]:checked`)) filled++;
+  });
+
+  // q6
+  total++;
+  if(document.getElementById('q6').value.trim().length > 20) filled++;
+
+  const pct = Math.round((filled/total)*100);
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+document.addEventListener('input', updateProgress);
+document.addEventListener('change', updateProgress);
+
+// ── TIER SELECTION ──
+function selectTier(el){
+  document.querySelectorAll('.tier-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selectedTier').value = el.dataset.tier;
+  updateProgress();
+}
+
+// ── VALIDATION ──
+function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) }
+
+function setError(fieldId, errId, show){
+  const field = document.getElementById(fieldId)?.closest('.field') || document.getElementById(errId)?.closest('.field');
+  const err = document.getElementById(errId);
+  if(field) field.classList.toggle('has-error', show);
+  if(err) err.style.display = show ? 'block' : 'none';
+}
+
+function validate(){
+  let ok = true;
+
+  // Tier
+  if(!document.getElementById('selectedTier').value){
+    ok = false;
+    document.querySelector('.tier-options').style.outline = '1px solid var(--error)';
+  } else {
+    document.querySelector('.tier-options').style.outline = 'none';
+  }
+
+  // Name
+  if(!document.getElementById('fname').value.trim()){ setError('fname','err-fname',true); ok=false; } else { setError('fname','err-fname',false); }
+  if(!document.getElementById('lname').value.trim()){ setError('lname','err-lname',true); ok=false; } else { setError('lname','err-lname',false); }
+
+  // Email
+  if(!validateEmail(document.getElementById('email').value)){ setError('email','err-email',true); ok=false; } else { setError('email','err-email',false); }
+
+  // Context
+  if(!document.getElementById('context').value){ setError('context','err-context',true); ok=false; } else { setError('context','err-context',false); }
+
+  // Textareas
+  ['q1','q2','q3','q6'].forEach(id=>{
+    const val = document.getElementById(id).value.trim();
+    const errId = 'err-'+id;
+    if(val.length < 10){ setError(id, errId, true); ok=false; } else { setError(id, errId, false); }
+  });
+
+  // Radio groups
+  ['q4','q5','q7','q8'].forEach(name=>{
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    const errEl = document.getElementById('err-'+name);
+    if(!checked){ if(errEl) errEl.style.display='block'; ok=false; }
+    else { if(errEl) errEl.style.display='none'; }
+  });
+
+  // Confirm
+  if(!document.getElementById('confirm').checked){
+    document.getElementById('err-confirm').style.display='block'; ok=false;
+  } else {
+    document.getElementById('err-confirm').style.display='none';
+  }
+
+  return ok;
+}
+
+// ── SUPABASE CONFIG ──
+const SUPABASE_URL  = 'https://btvaccofypcehaqxaxme.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dmFjY29meXBjZWhhcXhheG1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MzU2OTksImV4cCI6MjA4OTExMTY5OX0.55tDhqLFw4_fobaolaDVVPPn3lIh2JTOv86_tyV4syc';
+
+async function submitToSupabase(payload) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON,
+      'Authorization': `Bearer ${SUPABASE_ANON}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Error ${res.status}`);
+  }
+  return true;
+}
+
+async function trackView() {
+  await fetch(`${SUPABASE_URL}/rest/v1/page_views`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON,
+      'Authorization': `Bearer ${SUPABASE_ANON}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      page: 'application',
+      lang: document.documentElement.lang || 'en',
+      referrer: document.referrer || null,
+      user_agent: navigator.userAgent || null
+    })
+  }).catch(() => {});
+}
+
+// Track on load
+window.addEventListener('load', trackView);
+
+// ── FORM SUBMIT ──
+document.getElementById('appForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(!validate()) {
+    const firstErr = document.querySelector('.has-error');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('submit-txt').textContent = currentLang==='pt' ? 'Enviando...' : 'Submitting...';
+
+  // Build payload
+  const payload = {
+    tier:           document.getElementById('selectedTier').value,
+    first_name:     document.getElementById('fname').value.trim(),
+    last_name:      document.getElementById('lname').value.trim(),
+    email:          document.getElementById('email').value.trim().toLowerCase(),
+    location:       document.getElementById('location').value.trim() || null,
+    context:        document.getElementById('context').value,
+    lang:           currentLang,
+    q1_reactions:   document.getElementById('q1').value.trim(),
+    q2_moment:      document.getElementById('q2').value.trim(),
+    q3_prior_work:  document.getElementById('q3').value.trim(),
+    q4_challenge:   (document.querySelector('input[name="q4"]:checked') || {}).value || null,
+    q5_structure:   (document.querySelector('input[name="q5"]:checked') || {}).value || null,
+    q6_readiness:   document.getElementById('q6').value.trim(),
+    q7_interrupted: (document.querySelector('input[name="q7"]:checked') || {}).value || null,
+    q8_if_declined: (document.querySelector('input[name="q8"]:checked') || {}).value || null,
+    anything_else:  document.getElementById('anything').value.trim() || null,
+    status:         'pending'
+  };
+
+  try {
+    await submitToSupabase(payload);
+    document.getElementById('progressFill').style.width = '100%';
+    setTimeout(() => {
+      document.getElementById('formPanel').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }, 400);
+  } catch(err) {
+    console.error('Submission error:', err);
+    btn.disabled = false;
+    document.getElementById('submit-txt').textContent = currentLang==='pt' ? 'Enviar Candidatura' : 'Submit Application';
+    const errMsg = currentLang==='pt'
+      ? 'Erro ao enviar. Verifique sua conexão e tente novamente.'
+      : 'Submission failed. Please check your connection and try again.';
+    alert(errMsg);
+  }
+});
+
+// ── LANGUAGE ──
+const T = {
+  en: {
+    'nav-back-txt':'Back',
+    'hdr-eyebrow':'The Sovereignty Collective — Application',
+    'hdr-h1':'Submit your<br><em>application.</em>',
+    'hdr-desc':'Applications are reviewed. Invitations are extended selectively. Read each question carefully — your answers determine fit, not performance.',
+    'tier-label':'Which container are you applying for?',
+    't1-badge':'Tier I · Foundational','t1-name':'Foundational Integration Track','t1-desc':'6 weeks · Regulation capacity building · Readiness pathway','t1-price':'$1,500',
+    't2-badge':'Tier II · Elite Immersive','t2-name':'Identity Recalibration Lab','t2-desc':'8 weeks · Live recalibration · Application & invitation only','t2-price':'$4,500 – $6,000',
+    's1-title':'Personal Information','s1-sub':'Basic contact details. Shared only with Angie Martin.',
+    'lbl-fname':'First name','lbl-lname':'Last name','lbl-email':'Email address','lbl-location':'City / Country',
+    'lbl-context':'Primary context of application',
+    'ctx-default':'— Select one —','ctx-personal':'Personal growth & inner work','ctx-professional':'Professional evolution & leadership','ctx-both':'Both — personal and professional',
+    'err-fname':'Required','err-lname':'Required','err-email':'Enter a valid email','err-context':'Please select one',
+    's2-title':'Readiness Assessment','s2-sub':'These questions assess nervous system stability and self-responsibility. Answer with precision — not performance.',
+    'lbl-q1':'What recurring emotional reactions are you no longer willing to tolerate in yourself?',
+    'hint-q1':'No need to explain why — just describe what you observe.',
+    'lbl-q2':'Describe a recent moment where you reacted in a way that did not reflect who you believe yourself to be.',
+    'lbl-q3':'What personal development work have you already engaged in — and what has shifted, and what has remained unresolved?',
+    's3-title':'Self-Assessment','s3-sub':'Answer honestly. There are no correct answers — only accurate ones.',
+    'lbl-q4':'When challenged or disagreed with, you tend to:',
+    'r4a':'Defend my position immediately','r4b':'Withdraw and process alone','r4c':'Pause, then engage with curiosity','r4d':'It varies significantly by context',
+    'lbl-q5':'How do you relate to structure and accountability?',
+    'r5a':'I thrive with clear structure and high expectations','r5b':'I often resist structure even when I know it would help','r5c':'I\'m actively building my capacity for self-accountability',
+    'lbl-q6':'Why do you believe you are ready for immersive recalibration — at this specific point in your life?',
+    'hint-q6':'Readiness and desire are different. Reflect on both.',
+    's4-title':'Commitment & Standards','s4-sub':'This container requires more than interest. It requires readiness to be held to a standard.',
+    'lbl-q7':'Are you willing to be interrupted in your patterns in real time, during live sessions?',
+    'r7a':'Yes — that is precisely what I need','r7b':'I believe so, though I recognize I may resist at first','r7c':'I\'m not sure I\'m ready for that level of directness',
+    'notice-txt':'This Lab is selective and structured. If you are not invited at this time, you will be encouraged to reapply for a future cohort or offered a place in the Foundational Integration Track. <strong>Are you open to this possibility?</strong>',
+    'lbl-q8':'If not invited at this time, you are open to:',
+    'r8a':'Reapplying for a future cohort','r8b':'Beginning with the Foundational Track as a readiness pathway','r8c':'Both options, depending on the recommendation',
+    'lbl-anything':'Is there anything else you want Angie to know before reviewing your application?',
+    'lbl-confirm':'I understand this is not a purchase — it is an application. I accept that an invitation is extended at the discretion of The Sovereignty Collective, and that submission does not guarantee placement.',
+    'submit-txt':'Submit Application',
+    'submit-note':'Your application will be reviewed within 5–7 business days. No payment is required at this stage.',
+    'suc-h2':'Application<br><em>received.</em>',
+    'suc-p1':'Your application has been submitted and will be reviewed carefully. We do not rush this process — depth requires attention.',
+    'suc-p2':'You will receive a response within <strong>5–7 business days</strong>. If invited, you will receive full details regarding the container, investment structure, and next steps.',
+    'suc-note':'The Sovereignty Collective does not chase. If this is your time, we will meet you there.',
+    'suc-back':'Return to the Collective',
+    'ft-back':'← Back to The Sovereignty Collective',
+    'ft-tag':'Psychological clarity · Emotional power · Spiritual sovereignty',
+  },
+  pt: {
+    'nav-back-txt':'Voltar',
+    'hdr-eyebrow':'The Sovereignty Collective — Candidatura',
+    'hdr-h1':'Envie sua<br><em>candidatura.</em>',
+    'hdr-desc':'As candidaturas são revisadas. Os convites são estendidos seletivamente. Leia cada pergunta com cuidado — suas respostas determinam adequação, não performance.',
+    'tier-label':'Para qual container você está se candidatando?',
+    't1-badge':'Nível I · Fundacional','t1-name':'Trilha de Integração Fundacional','t1-desc':'6 semanas · Construção de capacidade regulatória · Caminho preparatório','t1-price':'$1.500',
+    't2-badge':'Nível II · Imersivo Elite','t2-name':'Lab de Recalibração de Identidade','t2-desc':'8 semanas · Recalibração ao vivo · Candidatura e convite apenas','t2-price':'$4.500 – $6.000',
+    's1-title':'Informações Pessoais','s1-sub':'Dados de contato básicos. Compartilhados apenas com Angie Martin.',
+    'lbl-fname':'Primeiro nome','lbl-lname':'Sobrenome','lbl-email':'Endereço de e-mail','lbl-location':'Cidade / País',
+    'lbl-context':'Contexto principal da candidatura',
+    'ctx-default':'— Selecione —','ctx-personal':'Crescimento pessoal e trabalho interior','ctx-professional':'Evolução profissional e liderança','ctx-both':'Ambos — pessoal e profissional',
+    'err-fname':'Campo obrigatório','err-lname':'Campo obrigatório','err-email':'Insira um e-mail válido','err-context':'Por favor selecione uma opção',
+    's2-title':'Avaliação de Prontidão','s2-sub':'Estas perguntas avaliam a estabilidade do sistema nervoso e a autorresponsabilidade. Responda com precisão — não com performance.',
+    'lbl-q1':'Quais reações emocionais recorrentes você não está mais disposta a tolerar em si mesma?',
+    'hint-q1':'Não é necessário explicar o porquê — apenas descreva o que você observa.',
+    'lbl-q2':'Descreva um momento recente em que você reagiu de uma forma que não refletiu quem você acredita ser.',
+    'lbl-q3':'Que trabalho de desenvolvimento pessoal você já realizou — e o que mudou, e o que permaneceu sem resolução?',
+    's3-title':'Autoavaliação','s3-sub':'Responda com honestidade. Não existem respostas corretas — apenas respostas precisas.',
+    'lbl-q4':'Quando questionada ou contrariada, você tende a:',
+    'r4a':'Defender minha posição imediatamente','r4b':'Recuar e processar sozinha','r4c':'Pausar, depois engajar com curiosidade','r4d':'Varia significativamente conforme o contexto',
+    'lbl-q5':'Como você se relaciona com estrutura e responsabilização?',
+    'r5a':'Prospero com estrutura clara e altas expectativas','r5b':'Frequentemente resisto à estrutura mesmo sabendo que me ajudaria','r5c':'Estou construindo ativamente minha capacidade de autorresponsabilidade',
+    'lbl-q6':'Por que você acredita estar pronta para a recalibração imersiva — neste momento específico da sua vida?',
+    'hint-q6':'Prontidão e desejo são coisas diferentes. Reflita sobre ambos.',
+    's4-title':'Compromisso e Padrões','s4-sub':'Este container exige mais do que interesse. Exige prontidão para ser mantida em um padrão.',
+    'lbl-q7':'Você está disposta a ser interrompida em seus padrões em tempo real, durante as sessões ao vivo?',
+    'r7a':'Sim — é exatamente isso que preciso','r7b':'Acredito que sim, embora reconheça que posso resistir no início','r7c':'Não tenho certeza se estou pronta para esse nível de diretividade',
+    'notice-txt':'Este Lab é seletivo e estruturado. Se você não for convidada neste momento, será encorajada a se recandidatar para uma futura coorte ou receberá uma vaga na Trilha de Integração Fundacional. <strong>Você está aberta a essa possibilidade?</strong>',
+    'lbl-q8':'Se não for convidada neste momento, você está aberta a:',
+    'r8a':'Recandidatar-se para uma futura coorte','r8b':'Começar pela Trilha Fundacional como caminho preparatório','r8c':'Ambas as opções, conforme a recomendação',
+    'lbl-anything':'Há algo mais que você queira que Angie saiba antes de revisar sua candidatura?',
+    'lbl-confirm':'Entendo que isso não é uma compra — é uma candidatura. Aceito que um convite é estendido a critério do The Sovereignty Collective, e que o envio não garante uma vaga.',
+    'submit-txt':'Enviar Candidatura',
+    'submit-note':'Sua candidatura será revisada em 5–7 dias úteis. Nenhum pagamento é necessário nesta fase.',
+    'suc-h2':'Candidatura<br><em>recebida.</em>',
+    'suc-p1':'Sua candidatura foi enviada e será revisada com cuidado. Não apressamos esse processo — a profundidade exige atenção.',
+    'suc-p2':'Você receberá uma resposta em até <strong>5–7 dias úteis</strong>. Se for convidada, receberá todos os detalhes sobre o container, estrutura de investimento e próximos passos.',
+    'suc-note':'O Sovereignty Collective não persegue. Se este for o seu momento, nos encontraremos lá.',
+    'suc-back':'Voltar ao Collective',
+    'ft-back':'← Voltar ao The Sovereignty Collective',
+    'ft-tag':'Clareza psicológica · Poder emocional · Soberania espiritual',
+  }
+};
+
+const MAP = [
+  ['#nav-back-txt','nav-back-txt'],['#hdr-eyebrow','hdr-eyebrow'],['#hdr-h1','hdr-h1'],
+  ['#hdr-desc','hdr-desc'],['#tier-label','tier-label'],
+  ['#t1-badge','t1-badge'],['#t1-name','t1-name'],['#t1-desc','t1-desc'],['#t1-price','t1-price'],
+  ['#t2-badge','t2-badge'],['#t2-name','t2-name'],['#t2-desc','t2-desc'],['#t2-price','t2-price'],
+  ['#s1-title','s1-title'],['#s1-sub','s1-sub'],
+  ['#lbl-fname','lbl-fname'],['#lbl-lname','lbl-lname'],['#lbl-email','lbl-email'],
+  ['#lbl-location','lbl-location'],['#lbl-context','lbl-context'],
+  ['#ctx-default','ctx-default'],['#ctx-personal','ctx-personal'],
+  ['#ctx-professional','ctx-professional'],['#ctx-both','ctx-both'],
+  ['#err-fname','err-fname'],['#err-lname','err-lname'],
+  ['#err-email','err-email'],['#err-context','err-context'],
+  ['#s2-title','s2-title'],['#s2-sub','s2-sub'],
+  ['#lbl-q1','lbl-q1'],['#hint-q1','hint-q1'],
+  ['#lbl-q2','lbl-q2'],['#lbl-q3','lbl-q3'],
+  ['#s3-title','s3-title'],['#s3-sub','s3-sub'],
+  ['#lbl-q4','lbl-q4'],['#r4a','r4a'],['#r4b','r4b'],['#r4c','r4c'],['#r4d','r4d'],
+  ['#lbl-q5','lbl-q5'],['#r5a','r5a'],['#r5b','r5b'],['#r5c','r5c'],
+  ['#lbl-q6','lbl-q6'],['#hint-q6','hint-q6'],
+  ['#s4-title','s4-title'],['#s4-sub','s4-sub'],
+  ['#lbl-q7','lbl-q7'],['#r7a','r7a'],['#r7b','r7b'],['#r7c','r7c'],
+  ['#notice-txt','notice-txt'],
+  ['#lbl-q8','lbl-q8'],['#r8a','r8a'],['#r8b','r8b'],['#r8c','r8c'],
+  ['#lbl-anything','lbl-anything'],['#lbl-confirm','lbl-confirm'],
+  ['#submit-txt','submit-txt'],['#submit-note','submit-note'],
+  ['#suc-h2','suc-h2'],['#suc-p1','suc-p1'],['#suc-p2','suc-p2'],
+  ['#suc-note','suc-note'],['#suc-back','suc-back'],
+  ['#ft-back','ft-back'],['#ft-tag','ft-tag'],
+];
+
+let currentLang = 'en';
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
+  const dict = T[lang];
+  MAP.forEach(([sel, key])=>{
+    const el = document.querySelector(sel);
+    if(el && dict[key]) el.innerHTML = dict[key];
+  });
+  // Also update placeholders
+  const ph = {
+    en: { fname:'Your first name', lname:'Your last name', email:'your@email.com', location:'e.g. São Paulo, Brazil', q1:'Be specific. Name the patterns, not just the feelings.', q2:'What happened? What did you notice? What followed?', q3:'Courses, therapy, coaching, books, practices — be specific about results.', q6:'Not why you want it — why you are ready for it.', anything:'Optional — share only what is genuinely relevant.' },
+    pt: { fname:'Seu primeiro nome', lname:'Seu sobrenome', email:'seu@email.com', location:'ex: São Paulo, Brasil', q1:'Seja específica. Nomeie os padrões, não apenas os sentimentos.', q2:'O que aconteceu? O que você percebeu? O que se seguiu?', q3:'Cursos, terapia, coaching, livros, práticas — seja específica sobre os resultados.', q6:'Não por que você quer — por que você está pronta.', anything:'Opcional — compartilhe apenas o que for genuinamente relevante.' }
+  };
+  const p = ph[lang];
+  document.getElementById('fname').placeholder = p.fname;
+  document.getElementById('lname').placeholder = p.lname;
+  document.getElementById('email').placeholder = p.email;
+  document.getElementById('location').placeholder = p.location;
+  document.getElementById('q1').placeholder = p.q1;
+  document.getElementById('q2').placeholder = p.q2;
+  document.getElementById('q3').placeholder = p.q3;
+  document.getElementById('q6').placeholder = p.q6;
+  document.getElementById('anything').placeholder = p.anything;
+  document.documentElement.lang = lang==='pt' ? 'pt-BR' : 'en';
+  document.title = lang==='pt' ? 'Candidatura — The Sovereignty Collective' : 'Apply — The Sovereignty Collective';
+}
+
+(function(){
+  document.getElementById('btn-en').addEventListener('click', ()=>setLang('en'));
+  document.getElementById('btn-pt').addEventListener('click', ()=>setLang('pt'));
+})();
+
+// ── DETECT TIER FROM URL PARAM ──
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const tier = params.get('tier');
+  if(tier){
+    const opt = document.querySelector(`.tier-opt[data-tier="${tier}"]`);
+    if(opt) selectTier(opt);
+  }
+})();
+</script>
+</body>
+</html>

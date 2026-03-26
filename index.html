@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sovereignty Collective — Angie Martin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#FAF7F2;
+  --sand:#E8DFD0;
+  --sand-mid:#D4C5AE;
+  --clay:#B8A48C;
+  --clay-dark:#8C7A62;
+  --gold:#C9A96E;
+  --gold-light:#E8D5A8;
+  --warm-dark:#2A2318;
+  --warm-mid:#3D3226;
+  --text:#4A3F30;
+  --text-muted:#7A6E5F;
+  --text-faint:#A89E8E;
+  --white:#FFFFFF;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--ivory);
+  color:var(--text);
+  font-weight:300;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 6vw;
+  transition:background .4s,border .4s;
+}
+nav.scrolled{
+  background:rgba(250,247,242,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.logo-text{
+  font-family:'Cormorant',serif;
+  font-size:1.15rem;
+  font-weight:400;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--warm-dark);
+  text-decoration:none;
+}
+.logo-text span{color:var(--gold)}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul a{
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-muted);text-decoration:none;
+  transition:color .25s;font-weight:400;
+}
+nav ul a:hover{color:var(--warm-dark)}
+.nav-apply{
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--warm-dark);border:1px solid rgba(42,35,24,.25);
+  padding:.5rem 1.4rem;border-radius:100px;text-decoration:none;
+  transition:background .25s,color .25s,border .25s;font-weight:400;
+}
+.nav-apply:hover{background:var(--warm-dark);color:var(--gold-light);border-color:var(--warm-dark)}
+
+/* ── LANG SWITCHER ── */
+.lang-switcher{
+  display:flex;align-items:center;gap:.5rem;
+  margin-left:1rem;
+}
+.lang-btn{
+  width:26px;height:26px;border-radius:50%;
+  border:1.5px solid transparent;
+  cursor:pointer;overflow:hidden;
+  padding:0;background:none;
+  transition:border-color .25s,transform .2s,opacity .25s;
+  opacity:.45;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.lang-btn svg{
+  pointer-events:none;
+  display:block;
+  border-radius:50%;
+}
+.lang-btn.active{
+  border-color:var(--gold);
+  opacity:1;
+  transform:scale(1.12);
+}
+.lang-btn:not(.active):hover{opacity:.8;transform:scale(1.08)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:10rem 6vw 6rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 60%,rgba(201,169,110,.06) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%,rgba(184,164,140,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 80% 20%,rgba(201,169,110,.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-grain{
+  position:absolute;inset:0;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-block;
+  font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2.5rem;
+  font-weight:400;
+}
+.hero h1{
+  font-family:'Cormorant',serif;
+  font-size:clamp(3.2rem,7vw,7rem);
+  font-weight:300;
+  line-height:1.05;
+  color:var(--warm-dark);
+  letter-spacing:-.01em;
+  margin-bottom:1rem;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--clay-dark);
+}
+.hero-sub{
+  font-family:'Cormorant',serif;
+  font-size:clamp(1rem,1.6vw,1.35rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--clay);
+  letter-spacing:.04em;
+  margin-bottom:3rem;
+  max-width:520px;
+  margin-left:auto;margin-right:auto;
+}
+.hero-divider{
+  width:40px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 2.5rem;
+}
+.hero-desc{
+  font-size:.9rem;
+  color:var(--text-muted);
+  max-width:520px;
+  margin:0 auto 3.5rem;
+  line-height:1.9;
+  font-weight:300;
+}
+.hero-actions{
+  display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;
+}
+.btn-primary{
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--warm-dark);color:var(--gold-light);
+  padding:.9rem 2.4rem;border-radius:100px;text-decoration:none;
+  font-weight:400;
+  transition:background .3s,transform .25s,box-shadow .3s;
+  box-shadow:0 8px 40px rgba(42,35,24,.18);
+}
+.btn-primary:hover{background:var(--clay-dark);transform:translateY(-2px);box-shadow:0 16px 48px rgba(42,35,24,.22)}
+.btn-ghost{
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-muted);text-decoration:none;font-weight:400;
+  padding:.9rem 1rem;
+  border-bottom:1px solid rgba(122,110,95,.25);
+  transition:color .25s,border .25s;
+}
+.btn-ghost:hover{color:var(--warm-dark);border-color:var(--warm-dark)}
+
+/* scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:.4;animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-hint span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
+
+/* ── SECTION BASE ── */
+section{padding:6rem 6vw}
+.container{max-width:1080px;margin:0 auto}
+.section-label{
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;display:block;font-weight:400;
+}
+.section-heading{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:300;line-height:1.2;
+  color:var(--warm-dark);
+  margin-bottom:1.5rem;
+}
+.section-heading em{font-style:italic;color:var(--clay-dark)}
+
+/* ── MANIFESTO / PHILOSOPHY ── */
+.philosophy{
+  background:var(--warm-dark);
+  color:var(--sand);
+  padding:7rem 6vw;
+}
+.philosophy .container{max-width:760px;margin:0 auto;text-align:center}
+.philosophy .section-label{color:var(--gold)}
+.philosophy-quote{
+  font-family:'Cormorant',serif;
+  font-size:clamp(1.6rem,3vw,2.6rem);
+  font-weight:300;
+  line-height:1.4;
+  font-style:italic;
+  color:var(--sand);
+  margin-bottom:2rem;
+  letter-spacing:.01em;
+}
+.philosophy-quote strong{
+  font-style:normal;font-weight:400;
+  color:var(--gold-light);
+}
+.philosophy-body{
+  font-size:.9rem;
+  color:var(--clay);
+  line-height:2;
+  max-width:560px;
+  margin:0 auto 2.5rem;
+}
+.phi-line{
+  width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 2.5rem;
+}
+
+/* ── PROBLEM ── */
+.problem{background:var(--ivory)}
+.problem-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+  max-width:1080px;margin:0 auto;
+}
+.problem-list{
+  list-style:none;display:flex;flex-direction:column;gap:1.2rem;
+  margin-top:2rem;
+}
+.problem-list li{
+  font-size:.9rem;
+  color:var(--text-muted);
+  padding-left:1.5rem;
+  position:relative;
+  line-height:1.7;
+}
+.problem-list li::before{
+  content:'';
+  position:absolute;left:0;top:.65em;
+  width:5px;height:1px;
+  background:var(--gold);
+}
+.problem-callout{
+  background:var(--warm-dark);
+  padding:3.5rem;
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+}
+.problem-callout::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.callout-text{
+  font-family:'Cormorant',serif;
+  font-size:1.6rem;
+  font-weight:300;
+  font-style:italic;
+  line-height:1.5;
+  color:var(--sand);
+}
+.callout-text strong{font-style:normal;color:var(--gold-light);font-weight:400}
+.callout-attr{
+  margin-top:2rem;
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--clay);
+}
+
+/* ── FRAMEWORK ── */
+.framework{background:var(--sand)}
+.pillars-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2rem;
+  margin-top:3.5rem;
+}
+.pillar{
+  background:var(--ivory);
+  padding:2.5rem 2rem;
+  border-top:1px solid var(--gold);
+  position:relative;
+}
+.pillar-num{
+  font-family:'Cormorant',serif;
+  font-size:3.5rem;font-weight:300;
+  color:rgba(201,169,110,.15);
+  position:absolute;top:1rem;right:1.5rem;
+  line-height:1;
+}
+.pillar h3{
+  font-family:'Cormorant',serif;
+  font-size:1.2rem;font-weight:400;
+  color:var(--warm-dark);
+  margin-bottom:.8rem;
+  letter-spacing:.02em;
+}
+.pillar p{
+  font-size:.85rem;
+  color:var(--text-muted);
+  line-height:1.8;
+}
+
+/* ── TIERS ── */
+.tiers{background:var(--ivory)}
+.tiers-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  margin-top:3.5rem;
+  max-width:860px;margin-left:auto;margin-right:auto;
+}
+.tier-card{
+  border:1px solid var(--sand-mid);
+  padding:3rem;
+  position:relative;
+  transition:border-color .3s;
+}
+.tier-card:hover{border-color:var(--gold)}
+.tier-badge{
+  display:inline-block;
+  font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--gold);
+  padding:.3rem .9rem;margin-bottom:2rem;
+  font-weight:400;
+}
+.tier-card h3{
+  font-family:'Cormorant',serif;
+  font-size:1.5rem;font-weight:400;
+  color:var(--warm-dark);margin-bottom:.5rem;
+}
+.tier-duration{
+  font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:1.5rem;display:block;
+}
+.tier-desc{
+  font-size:.88rem;color:var(--text-muted);
+  line-height:1.85;margin-bottom:2rem;
+}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.5rem}
+.tier-features li{
+  font-size:.82rem;color:var(--text-muted);
+  display:flex;align-items:center;gap:.7rem;
+}
+.tier-features li::before{
+  content:'';
+  flex-shrink:0;width:16px;height:1px;
+  background:var(--gold);
+}
+.tier-investment{
+  font-family:'Cormorant',serif;
+  font-size:1.5rem;font-weight:400;
+  color:var(--warm-dark);
+  display:block;margin-bottom:.3rem;
+}
+.tier-note{font-size:.72rem;color:var(--text-faint);letter-spacing:.05em}
+.tier-card.featured{
+  background:var(--warm-dark);
+  border-color:var(--warm-dark);
+}
+.tier-card.featured .tier-badge{color:var(--gold-light);border-color:var(--gold-light)}
+.tier-card.featured h3,.tier-card.featured .tier-investment{color:var(--sand)}
+.tier-card.featured .tier-duration,.tier-card.featured .tier-note{color:var(--clay)}
+.tier-card.featured .tier-desc,.tier-card.featured .tier-features li{color:var(--sand-mid)}
+.tier-card.featured .tier-features li::before{background:var(--gold)}
+.tier-apply-btn{
+  display:inline-block;
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.75rem 1.8rem;border-radius:100px;text-decoration:none;
+  font-weight:400;transition:all .3s;margin-top:.5rem;
+}
+.tier-apply-light{
+  color:var(--warm-dark);border:1px solid rgba(42,35,24,.25);
+}
+.tier-apply-light:hover{background:var(--warm-dark);color:var(--gold-light);border-color:var(--warm-dark)}
+.tier-apply-dark{
+  color:var(--gold-light);border:1px solid rgba(201,169,110,.3);
+}
+.tier-apply-dark:hover{background:var(--gold);color:var(--warm-dark);border-color:var(--gold)}
+
+/* ── MASTERCLASS ── */
+.masterclass{
+  background:linear-gradient(135deg,var(--sand) 0%,var(--ivory) 100%);
+  padding:7rem 6vw;
+}
+.masterclass-inner{
+  max-width:820px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+}
+.mc-tag{
+  display:inline-block;
+  font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--warm-dark);color:var(--gold-light);
+  padding:.4rem 1rem;margin-bottom:2rem;font-weight:400;
+}
+.masterclass h2{
+  font-family:'Cormorant',serif;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:300;line-height:1.2;
+  color:var(--warm-dark);margin-bottom:1rem;
+}
+.masterclass h2 em{font-style:italic;color:var(--clay-dark)}
+.mc-desc{font-size:.88rem;color:var(--text-muted);line-height:1.9;margin-bottom:2rem}
+.mc-outline{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.mc-outline li{
+  display:grid;grid-template-columns:3rem 1fr;gap:.5rem;
+  align-items:start;
+}
+.mc-time{
+  font-size:.65rem;letter-spacing:.1em;
+  color:var(--gold);padding-top:.12rem;font-weight:400;
+}
+.mc-topic{font-size:.85rem;color:var(--text-muted);line-height:1.6}
+
+/* ── PROCESS ── */
+.process{background:var(--ivory);padding:7rem 6vw}
+.stages{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;margin-top:4rem;
+  border-top:1px solid var(--sand-mid);
+  border-left:1px solid var(--sand-mid);
+  max-width:900px;margin-left:auto;margin-right:auto;
+  margin-top:4rem;
+}
+.stage{
+  padding:2.5rem 2rem;
+  border-right:1px solid var(--sand-mid);
+  border-bottom:1px solid var(--sand-mid);
+  position:relative;transition:background .3s;
+}
+.stage:hover{background:var(--sand)}
+.stage-num{
+  font-family:'Cormorant',serif;
+  font-size:.8rem;letter-spacing:.2em;
+  color:var(--gold);margin-bottom:1.2rem;display:block;font-weight:400;
+}
+.stage h3{
+  font-family:'Cormorant',serif;
+  font-size:1.25rem;font-weight:400;
+  color:var(--warm-dark);margin-bottom:.8rem;
+}
+.stage p{font-size:.82rem;color:var(--text-muted);line-height:1.8}
+
+/* ── SELECTION ── */
+.selection{
+  background:var(--warm-dark);
+  padding:7rem 6vw;
+  text-align:center;
+}
+.selection .section-label{color:var(--gold)}
+.selection h2{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:300;line-height:1.2;
+  color:var(--sand);margin-bottom:1.5rem;
+}
+.selection h2 em{font-style:italic;color:var(--gold-light)}
+.selection-desc{
+  font-size:.9rem;color:var(--clay);
+  line-height:2;max-width:540px;margin:0 auto 3rem;
+}
+.criteria-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;max-width:700px;margin:0 auto 4rem;
+  text-align:left;
+}
+.criteria-item{
+  border:1px solid rgba(201,169,110,.2);
+  padding:1.5rem;
+}
+.criteria-label{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.6rem;display:block;
+}
+.criteria-text{font-size:.84rem;color:var(--sand-mid);line-height:1.7}
+
+/* ── STANDARD / STANDARDS ── */
+.standards{background:var(--ivory);padding:7rem 6vw}
+.standards-inner{
+  max-width:860px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:start;
+}
+.standards-list{
+  list-style:none;display:flex;flex-direction:column;gap:2rem;
+  margin-top:2rem;
+}
+.standards-list li{
+  display:grid;grid-template-columns:2px 1fr;gap:1.2rem;
+  align-items:start;
+}
+.standards-list li span.bar{
+  width:2px;height:100%;
+  background:var(--gold);margin-top:.3rem;min-height:40px;
+  flex-shrink:0;
+}
+.standards-list li div h4{
+  font-family:'Cormorant',serif;
+  font-size:1rem;font-weight:400;
+  color:var(--warm-dark);margin-bottom:.3rem;
+}
+.standards-list li div p{font-size:.83rem;color:var(--text-muted);line-height:1.8}
+.standards-quote{
+  background:var(--sand);
+  padding:3rem;
+  border-left:2px solid var(--gold);
+  position:sticky;top:8rem;
+}
+.sq-text{
+  font-family:'Cormorant',serif;
+  font-size:1.4rem;font-weight:300;font-style:italic;
+  line-height:1.6;color:var(--warm-dark);margin-bottom:1.5rem;
+}
+.sq-sub{font-size:.8rem;color:var(--text-muted);line-height:1.8}
+
+/* ── CLOSING CTA ── */
+.closing{
+  background:var(--warm-dark);
+  padding:9rem 6vw;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.closing::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.closing-eyebrow{
+  font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2rem;display:block;font-weight:400;
+}
+.closing h2{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2.5rem,5vw,5rem);
+  font-weight:300;line-height:1.1;
+  color:var(--sand);margin-bottom:1.5rem;
+}
+.closing h2 em{font-style:italic;color:var(--gold-light)}
+.closing-sub{
+  font-family:'Cormorant',serif;
+  font-size:1.1rem;font-weight:300;font-style:italic;
+  color:var(--clay);margin-bottom:3rem;
+}
+.closing-note{
+  font-size:.8rem;color:rgba(184,164,140,.5);
+  max-width:440px;margin:1.5rem auto 0;
+  line-height:1.8;
+}
+.closing-divider{
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  margin:0 auto 2.5rem;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--warm-dark);
+  border-top:1px solid rgba(201,169,110,.1);
+  padding:3rem 6vw;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{
+  font-family:'Cormorant',serif;
+  font-size:1rem;font-weight:400;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);text-decoration:none;
+}
+.footer-logo span{color:var(--gold)}
+.footer-tagline{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--clay);text-align:center;
+}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--clay);text-decoration:none;transition:color .25s;
+}
+.footer-links a:hover{color:var(--gold)}
+
+/* ── HERO DUAL BADGE ── */
+.hero-dual-badge{
+  display:flex;align-items:center;justify-content:center;
+  gap:.8rem;margin:0 auto 2.5rem;flex-wrap:wrap;
+}
+.dual-pill{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.68rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--clay-dark);
+  border:1px solid rgba(140,122,98,.3);
+  padding:.4rem 1rem;border-radius:100px;
+  background:rgba(232,223,208,.35);
+}
+.dual-divider{
+  font-size:.9rem;color:var(--gold);font-weight:300;
+}
+
+/* ── DUAL APPLICATION SECTION ── */
+.dual-app{
+  background:var(--warm-dark);
+  padding:7rem 6vw;
+}
+.dual-app-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  max-width:960px;
+  margin:3.5rem auto 0;
+}
+.dual-card{
+  padding:3.5rem 3rem;
+  position:relative;
+}
+.dual-card:first-child{
+  background:rgba(255,255,255,.03);
+  border-right:1px solid rgba(201,169,110,.12);
+}
+.dual-card:last-child{
+  background:rgba(201,169,110,.05);
+}
+.dual-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,169,110,.3),transparent);
+}
+.dual-icon{
+  width:44px;height:44px;
+  border:1px solid rgba(201,169,110,.3);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.8rem;
+}
+.dual-icon svg{ stroke:var(--gold); fill:none; }
+.dual-card-label{
+  font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.8rem;display:block;
+}
+.dual-card h3{
+  font-family:'Cormorant',serif;
+  font-size:1.6rem;font-weight:300;
+  color:var(--sand);margin-bottom:1rem;
+  line-height:1.2;
+}
+.dual-card h3 em{ font-style:italic;color:var(--gold-light); }
+.dual-card p{
+  font-size:.87rem;color:var(--clay);
+  line-height:1.9;margin-bottom:1.8rem;
+}
+.dual-list{
+  list-style:none;display:flex;flex-direction:column;gap:.65rem;
+}
+.dual-list li{
+  font-size:.82rem;color:var(--sand-mid);
+  display:flex;align-items:flex-start;gap:.8rem;line-height:1.6;
+}
+.dual-list li::before{
+  content:'';flex-shrink:0;
+  width:16px;height:1px;
+  background:var(--gold);margin-top:.7em;
+}
+.dual-bridge{
+  max-width:960px;margin:3rem auto 0;
+  text-align:center;
+  padding-top:3rem;
+  border-top:1px solid rgba(201,169,110,.12);
+}
+.dual-bridge p{
+  font-family:'Cormorant',serif;
+  font-size:1.25rem;font-weight:300;font-style:italic;
+  color:var(--sand-mid);line-height:1.7;
+  max-width:620px;margin:0 auto;
+}
+.dual-bridge strong{font-style:normal;color:var(--gold-light);font-weight:400;}
+
+@media(max-width:860px){
+  .dual-app-grid{grid-template-columns:1fr;}
+  .dual-card:first-child{border-right:none;border-bottom:1px solid rgba(201,169,110,.12);}
+}
+.reveal{
+  opacity:1;transform:none;
+  transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);
+}
+.reveal.animate-ready{
+  opacity:0;transform:translateY(24px);
+}
+.reveal.animate-ready.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .problem-grid,.tiers-grid,.masterclass-inner,.standards-inner,.criteria-grid{grid-template-columns:1fr}
+  .pillars-grid,.stages{grid-template-columns:1fr}
+  nav ul{display:none}
+  footer{flex-direction:column;gap:1.5rem;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="logo-text" href="#"><span>T</span>he Sovereignty Collective</a>
+  <ul>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#tiers">The Lab</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#masterclass">Masterclass</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a class="nav-apply" href="pages/application.html" id="nav-apply-btn">Apply</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-en" title="English">
+        <!-- US Flag SVG inline -->
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;border-radius:50%;display:block;overflow:hidden">
+          <clipPath id="circle-clip-en"><circle cx="11" cy="11" r="11"/></clipPath>
+          <g clip-path="url(#circle-clip-en)">
+            <rect width="22" height="22" fill="#B22234"/>
+            <rect y="1.69" width="22" height="1.69" fill="#fff"/>
+            <rect y="5.08" width="22" height="1.69" fill="#fff"/>
+            <rect y="8.46" width="22" height="1.69" fill="#fff"/>
+            <rect y="11.85" width="22" height="1.69" fill="#fff"/>
+            <rect y="15.23" width="22" height="1.69" fill="#fff"/>
+            <rect y="18.62" width="22" height="1.69" fill="#fff"/>
+            <rect width="9.5" height="11.85" fill="#3C3B6E"/>
+            <!-- Stars simplified as dots -->
+            <g fill="#fff" font-size="2">
+              <circle cx="1.2" cy="1.1" r=".7"/><circle cx="2.8" cy="1.1" r=".7"/><circle cx="4.4" cy="1.1" r=".7"/><circle cx="6" cy="1.1" r=".7"/><circle cx="7.6" cy="1.1" r=".7"/><circle cx="9.2" cy="1.1" r=".7"/>
+              <circle cx="2" cy="2.5" r=".7"/><circle cx="3.6" cy="2.5" r=".7"/><circle cx="5.2" cy="2.5" r=".7"/><circle cx="6.8" cy="2.5" r=".7"/><circle cx="8.4" cy="2.5" r=".7"/>
+              <circle cx="1.2" cy="3.9" r=".7"/><circle cx="2.8" cy="3.9" r=".7"/><circle cx="4.4" cy="3.9" r=".7"/><circle cx="6" cy="3.9" r=".7"/><circle cx="7.6" cy="3.9" r=".7"/><circle cx="9.2" cy="3.9" r=".7"/>
+              <circle cx="2" cy="5.3" r=".7"/><circle cx="3.6" cy="5.3" r=".7"/><circle cx="5.2" cy="5.3" r=".7"/><circle cx="6.8" cy="5.3" r=".7"/><circle cx="8.4" cy="5.3" r=".7"/>
+              <circle cx="1.2" cy="6.7" r=".7"/><circle cx="2.8" cy="6.7" r=".7"/><circle cx="4.4" cy="6.7" r=".7"/><circle cx="6" cy="6.7" r=".7"/><circle cx="7.6" cy="6.7" r=".7"/><circle cx="9.2" cy="6.7" r=".7"/>
+              <circle cx="2" cy="8.1" r=".7"/><circle cx="3.6" cy="8.1" r=".7"/><circle cx="5.2" cy="8.1" r=".7"/><circle cx="6.8" cy="8.1" r=".7"/><circle cx="8.4" cy="8.1" r=".7"/>
+              <circle cx="1.2" cy="9.5" r=".7"/><circle cx="2.8" cy="9.5" r=".7"/><circle cx="4.4" cy="9.5" r=".7"/><circle cx="6" cy="9.5" r=".7"/><circle cx="7.6" cy="9.5" r=".7"/><circle cx="9.2" cy="9.5" r=".7"/>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <button class="lang-btn" id="btn-pt" title="Português">
+        <!-- Brazil Flag SVG inline -->
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;border-radius:50%;display:block;overflow:hidden">
+          <clipPath id="circle-clip-br"><circle cx="11" cy="11" r="11"/></clipPath>
+          <g clip-path="url(#circle-clip-br)">
+            <rect width="22" height="22" fill="#009C3B"/>
+            <polygon points="11,2 21,11 11,20 1,11" fill="#FEDF00"/>
+            <circle cx="11" cy="11" r="4.2" fill="#002776"/>
+            <path d="M7.2,9.8 Q11,8 14.8,9.8" stroke="#fff" stroke-width=".7" fill="none"/>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Led by Angie Martin · Sovereignty Architect</span>
+    <h1>
+      You are not<br>
+      <em>broken.</em><br>
+      You are protecting.
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">And protection is structural.</p>
+    <p class="hero-desc">
+      The Sovereignty Collective is a private identity recalibration environment
+      for high-capacity individuals ready to eliminate emotional reactivity at the root —
+      in their personal lives, their leadership, and their professional performance.
+    </p>
+    <div class="hero-dual-badge reveal">
+      <span class="dual-pill" id="dual-pill-personal">
+        <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0"><circle cx="5" cy="5" r="4" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="5" cy="5" r="1.5" fill="currentColor"/></svg>
+        Personal Growth
+      </span>
+      <span class="dual-divider">+</span>
+      <span class="dual-pill" id="dual-pill-professional">
+        <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0"><rect x="1" y="3" width="8" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1"/><path d="M3 3V2a2 2 0 0 1 4 0v1" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+        Professional Evolution
+      </span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#masterclass">Attend the Masterclass</a>
+      <a class="btn-ghost" href="#tiers">Explore the Lab</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="container">
+    <span class="section-label reveal">The Foundation</span>
+    <div class="phi-line reveal reveal-delay-1"></div>
+    <p class="philosophy-quote reveal reveal-delay-2">
+      "Transformation is not mindset.<br>
+      <strong>It is nervous system capacity.</strong>"
+    </p>
+    <div class="phi-line reveal reveal-delay-3"></div>
+    <p class="philosophy-body reveal reveal-delay-4">
+      For too long, transformation has been sold as mindset work, manifestation rituals,
+      or spiritual bypassing. But identity does not shift through affirmation.
+      It shifts through integration.
+    </p>
+    <p class="philosophy-body reveal">
+      Your nervous system determines what you can hold: success, visibility, intimacy, expansion.
+      When expansion feels unsafe, the body contracts. When contraction is misunderstood,
+      people call it failure. It isn't failure. It's protection.
+    </p>
+    <p class="philosophy-body reveal" style="color:var(--sand-mid);font-style:italic;font-family:'Cormorant',serif;font-size:1rem;letter-spacing:.04em">
+      My work is not about becoming someone new.<br>
+      It is about recalibrating the system that decides who you are allowed to be.
+    </p>
+    <p id="phi-signature" class="philosophy-body reveal" style="color:var(--gold);font-size:.75rem;letter-spacing:.2em;font-style:normal;font-family:'Jost',sans-serif;text-transform:uppercase;margin-top:1rem">— Angie Martin</p>
+  </div>
+</section>
+
+<!-- DUAL APPLICATION -->
+<section class="dual-app" id="dual-app">
+  <div style="max-width:960px;margin:0 auto;text-align:center;">
+    <span class="section-label reveal" id="dual-label" style="color:var(--gold)">The Scope</span>
+    <h2 class="section-heading reveal reveal-delay-1" id="dual-h2" style="color:var(--sand)">
+      Personal evolution.<br>
+      <em>Professional sovereignty.</em>
+    </h2>
+    <p style="font-size:.9rem;color:var(--clay);line-height:1.9;max-width:580px;margin:0 auto" class="reveal reveal-delay-2" id="dual-intro">
+      The same nervous system that reacts in a difficult conversation at home
+      is the one that hesitates before a high-stakes decision at work.
+      This work addresses both — because they are the same system.
+    </p>
+  </div>
+
+  <div class="dual-app-grid">
+    <!-- Personal -->
+    <div class="dual-card reveal reveal-delay-1">
+      <div class="dual-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.2">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <span class="dual-card-label" id="dc1-label">Personal Growth</span>
+      <h3 id="dc1-h">Reclaim your<br><em>inner authority.</em></h3>
+      <p id="dc1-p">
+        Patterns formed in your personal history — relationships, family dynamics, emotional wounds — shape how you move through every area of life. Recalibration here is not therapy. It is structural identity work that rewrites the reactive loops at their root.
+      </p>
+      <ul class="dual-list" id="dc1-list">
+        <li>Emotional regulation in relationships</li>
+        <li>Breaking cycles of self-sabotage</li>
+        <li>Rebuilding trust in your own decisions</li>
+        <li>Expanding capacity for intimacy and visibility</li>
+        <li>Dissolving patterns inherited from past experiences</li>
+      </ul>
+    </div>
+
+    <!-- Professional -->
+    <div class="dual-card reveal reveal-delay-2">
+      <div class="dual-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/>
+          <line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+      </div>
+      <span class="dual-card-label" id="dc2-label">Professional Evolution</span>
+      <h3 id="dc2-h">Lead from<br><em>structural composure.</em></h3>
+      <p id="dc2-p">
+        High performance without regulation produces burnout. Leaders, entrepreneurs, and executives who cannot regulate under pressure cannot sustain the level they are building toward. This work increases nervous system capacity for high-stakes environments — not through motivation, but through structural recalibration.
+      </p>
+      <ul class="dual-list" id="dc2-list">
+        <li>Decision-making under pressure without reactivity</li>
+        <li>Leading teams with regulated authority</li>
+        <li>Sustaining high performance without collapse</li>
+        <li>Eliminating imposter responses at expansion points</li>
+        <li>Building capacity for visibility and leadership at scale</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dual-bridge reveal">
+    <p id="dual-bridge-text">
+      "Whether the challenge is personal or professional,
+      the nervous system is the <strong>same gatekeeper.</strong>
+      Sovereignty in one domain naturally expands into the other."
+    </p>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="problem-grid">
+    <div>
+      <span class="section-label reveal">The Pattern</span>
+      <h2 class="section-heading reveal reveal-delay-1">
+        You've done the work.<br>
+        <em>The pattern remains.</em>
+      </h2>
+      <p style="font-size:.9rem;color:var(--text-muted);line-height:1.9;margin-bottom:2rem" class="reveal reveal-delay-2">
+        If you are intelligent, self-aware, and ambitious — yet still find yourself repeating the same emotional reactions in your relationships, collapsing after expansion, or hesitating before high-stakes decisions at work — you are not lacking discipline. Your nervous system has not recalibrated to match the level you're trying to live and lead at.
+      </p>
+      <ul class="problem-list reveal reveal-delay-3">
+        <li>Pulling back before visibility</li>
+        <li>Overworking before breakthrough</li>
+        <li>Losing momentum after expansion</li>
+        <li>Questioning yourself at the edge of growth</li>
+        <li>Insight without behavioral shift</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="problem-callout">
+        <p class="callout-text">
+          "The nervous system is loyal to <strong>familiarity,</strong> not potential."
+        </p>
+        <p class="callout-text" style="margin-top:1.5rem;font-size:1.1rem">
+          "Identity is a prediction<br>the nervous system <strong>defends.</strong>"
+        </p>
+        <p class="callout-attr">— Core Framework · The Sovereignty Collective</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="framework" id="framework">
+  <div class="container">
+    <span class="section-label reveal">The Approach</span>
+    <h2 class="section-heading reveal reveal-delay-1">
+      Regulation. Integration.<br>
+      <em>Structural Sovereignty.</em>
+    </h2>
+    <p style="font-size:.9rem;color:var(--text-muted);line-height:1.9;max-width:600px" class="reveal reveal-delay-2">
+      The Circulation Model™ is a structured identity recalibration framework rooted in nervous system science, behavioral pattern analysis, and somatic integration. Not mystical. Not motivational. Structural.
+    </p>
+    <div class="pillars-grid">
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-num">I</span>
+        <h3>Neutral Energy</h3>
+        <p>Life force is raw potential shaped by attention, emotion, belief, and intention — not inherently positive or negative.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-num">II</span>
+        <h3>Directed Attention</h3>
+        <p>Attention is the steering wheel of your energetic field. Where focus goes, energy organizes — amplifying contraction or expansion.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar-num">III</span>
+        <h3>Activation Cycles</h3>
+        <p>Contraction is not failure. It is compression before expansion. Resisting contraction blocks integration.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-num">IV</span>
+        <h3>Somatic Charge</h3>
+        <p>Unprocessed experience becomes stored charge in the body. Triggers are pockets of frozen energy asking to move.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-num">V</span>
+        <h3>Nervous System Capacity</h3>
+        <p>The nervous system determines how much you can hold — joy, success, intimacy, visibility. This is capacity, not mindset.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar-num">VI</span>
+        <h3>Structural Integration</h3>
+        <p>Energy must circulate. What is received must be processed. What is processed must be expressed. Stagnation is an incomplete cycle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTERCLASS -->
+<section class="masterclass" id="masterclass">
+  <div class="masterclass-inner">
+    <div>
+      <span class="mc-tag reveal">Free · 60 Minutes</span>
+      <h2 class="reveal reveal-delay-1">
+        <em>Why You're Still Reacting</em><br>
+        Even After Doing the Work
+      </h2>
+      <p class="mc-desc reveal reveal-delay-2">
+        A structured 60-minute masterclass for high-capacity individuals who recognize their patterns but cannot stabilize beyond them. This is not motivational content. It is structural clarity.
+      </p>
+      <a class="btn-primary reveal reveal-delay-3" href="pages/application.html" style="display:inline-block">Reserve Your Place</a>
+      <p style="font-size:.72rem;color:var(--text-faint);margin-top:1rem;letter-spacing:.05em" class="reveal reveal-delay-4">Applications open quarterly. No urgency. No countdown.</p>
+    </div>
+    <div>
+      <ul class="mc-outline reveal">
+        <li>
+          <span class="mc-time">0–10</span>
+          <span class="mc-topic">Reframe the problem — reactivity is structural protection, not character failure</span>
+        </li>
+        <li>
+          <span class="mc-time">10–25</span>
+          <span class="mc-topic">The mechanics — nervous system baseline, stored emotional charge, and the identity protection loop</span>
+        </li>
+        <li>
+          <span class="mc-time">25–40</span>
+          <span class="mc-topic">Live reactivity mapping and micro-regulation practice — you will feel a shift</span>
+        </li>
+        <li>
+          <span class="mc-time">40–50</span>
+          <span class="mc-topic">Why knowledge fails without integration and why high-capacity individuals struggle more</span>
+        </li>
+        <li>
+          <span class="mc-time">50–60</span>
+          <span class="mc-topic">A measured invitation — no pressure, no persuasion, just structural clarity</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <span class="section-label reveal">The Recalibration Pathway</span>
+    <h2 class="section-heading reveal reveal-delay-1" style="margin-bottom:.5rem">
+      Three stages.<br>
+      <em>One structural shift.</em>
+    </h2>
+    <p style="font-size:.88rem;color:var(--text-muted);max-width:500px;margin:0 auto" class="reveal reveal-delay-2">
+      Insight is a map. Regulation is terrain stability. One informs. The other transforms.
+    </p>
+  </div>
+  <div class="stages">
+    <div class="stage reveal">
+      <span class="stage-num">Stage I</span>
+      <h3>Awareness</h3>
+      <p>Recognizing protection patterns in real time. Not analysis — observation. You see the reaction forming before it acts.</p>
+    </div>
+    <div class="stage reveal reveal-delay-1">
+      <span class="stage-num">Stage II</span>
+      <h3>Regulation</h3>
+      <p>Increasing nervous system capacity under activation. Inserting space between stimulus and response. That space is sovereignty.</p>
+    </div>
+    <div class="stage reveal reveal-delay-2">
+      <span class="stage-num">Stage III</span>
+      <h3>Integration</h3>
+      <p>Repeating expansion without collapse. Growth becomes stable. Not thrilling. Not terrifying. Just steady.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tiers" id="tiers">
+  <div style="text-align:center;margin-bottom:1rem">
+    <span class="section-label reveal">The Containers</span>
+    <h2 class="section-heading reveal reveal-delay-1" style="margin-bottom:.5rem">
+      Two tiers.<br>
+      <em>One standard.</em>
+    </h2>
+    <p style="font-size:.88rem;color:var(--text-muted);max-width:520px;margin:0 auto" class="reveal reveal-delay-2">
+      Applications are required for both. Invitations are extended selectively. Depth demands readiness.
+    </p>
+  </div>
+  <div class="tiers-grid">
+    <!-- Tier I -->
+    <div class="tier-card reveal reveal-delay-1">
+      <span class="tier-badge">Tier I · Foundational</span>
+      <h3>Foundational Integration Track</h3>
+      <span class="tier-duration">6 Weeks · 75-min Weekly Sessions</span>
+      <p class="tier-desc">
+        A structured readiness environment for high-capacity individuals building nervous system regulation capacity before immersive recalibration. Not a starter program — a preparatory tier.
+      </p>
+      <ul class="tier-features">
+        <li>Emotional reactivity mapping</li>
+        <li>Nervous system fundamentals and baseline regulation</li>
+        <li>Pattern awareness and loop deconstruction</li>
+        <li>Self-responsibility and internal governance training</li>
+        <li>Boundary calibration under pressure</li>
+        <li>Readiness assessment for the Lab</li>
+      </ul>
+      <span class="tier-investment">$1,500</span>
+      <span class="tier-note">Structured investment options available before Week Two</span>
+      <br><br>
+      <a href="pages/application.html?tier=foundational" class="tier-apply-btn tier-apply-light">Apply for Foundational Track</a>
+    </div>
+    <!-- Tier II -->
+    <div class="tier-card featured reveal reveal-delay-2">
+      <span class="tier-badge">Tier II · Elite Immersive</span>
+      <h3>Identity Recalibration Lab</h3>
+      <span class="tier-duration">8 Weeks · 90-min Live Immersive Labs</span>
+      <p class="tier-desc">
+        A live identity recalibration lab for high-capacity individuals ready to eliminate emotional reactivity and operate from structural sovereignty. Strategic and elite. Sacred and precise.
+      </p>
+      <ul class="tier-features">
+        <li>Live advanced reactivity deconstruction</li>
+        <li>Stored emotional charge extraction protocols</li>
+        <li>Identity architecture audit and repatterning</li>
+        <li>Decision precision and sovereignty protocols</li>
+        <li>Boundary mastery under simulated pressure</li>
+        <li>Personal sovereignty blueprint and stabilization</li>
+      </ul>
+      <span class="tier-investment">$4,500 – $6,000</span>
+      <span class="tier-note">12–16 participants · Application and invitation only</span>
+      <br><br>
+      <a href="pages/application.html?tier=lab" class="tier-apply-btn tier-apply-dark">Apply to the Lab</a>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTION -->
+<section class="selection" id="selection">
+  <span class="section-label reveal">The Standard</span>
+  <h2 class="reveal reveal-delay-1">
+    The Lab selects.<br>
+    <em>You apply.</em>
+  </h2>
+  <p class="selection-desc reveal reveal-delay-2">
+    Applications are reviewed. Invitations are extended to those aligned with the depth and self-responsibility required for this work. This is not exclusion — it is stewardship of the container.
+  </p>
+  <div class="criteria-grid reveal reveal-delay-3">
+    <div class="criteria-item">
+      <span class="criteria-label">You may be ready if you</span>
+      <p class="criteria-text">Have prior development experience and can articulate your patterns clearly with self-responsibility — not blame.</p>
+    </div>
+    <div class="criteria-item">
+      <span class="criteria-label">You may be ready if you</span>
+      <p class="criteria-text">Are willing to be interrupted in your patterns in real time without defensiveness or collapse.</p>
+    </div>
+    <div class="criteria-item">
+      <span class="criteria-label">You may be ready if you</span>
+      <p class="criteria-text">Seek structural change over inspiration, and value regulated authority over emotional catharsis.</p>
+    </div>
+    <div class="criteria-item">
+      <span class="criteria-label">This is not for those seeking</span>
+      <p class="criteria-text">Motivation, surface mindset work, emotional venting spaces, or transformation through inspiration alone.</p>
+    </div>
+  </div>
+  <a class="btn-primary reveal reveal-delay-4" href="pages/application.html" style="display:inline-block;margin-bottom:1rem">Submit Your Application</a>
+  <p style="font-size:.75rem;color:rgba(184,164,140,.45);letter-spacing:.08em" class="reveal">
+    Those not yet invited may be encouraged to reapply for a future cohort, or offered placement in the Foundational Track as a preparatory pathway.
+  </p>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards" id="standards">
+  <div class="standards-inner">
+    <div>
+      <span class="section-label reveal">The Outcomes</span>
+      <h2 class="section-heading reveal reveal-delay-1">
+        What regulated<br>
+        <em>actually looks like.</em>
+      </h2>
+      <ul class="standards-list">
+        <li class="reveal reveal-delay-1">
+          <span class="bar"></span>
+          <div>
+            <h4>Response Latency Control</h4>
+            <p>You insert a conscious pause between stimulus and reaction — physiologically, not philosophically. Sovereignty lives in the milliseconds.</p>
+          </div>
+        </li>
+        <li class="reveal reveal-delay-2">
+          <span class="bar"></span>
+          <div>
+            <h4>Charge Completion Awareness</h4>
+            <p>You process emotional activation without narrative collapse — not suppress, not dramatize, not dissociate.</p>
+          </div>
+        </li>
+        <li class="reveal reveal-delay-3">
+          <span class="bar"></span>
+          <div>
+            <h4>State-Independent Decision Making</h4>
+            <p>You make decisions without catastrophizing, personalizing, or defaulting to old identity loops.</p>
+          </div>
+        </li>
+        <li class="reveal reveal-delay-4">
+          <span class="bar"></span>
+          <div>
+            <h4>Predictive Model Awareness</h4>
+            <p>You catch your old patterns predicting — without shame, without spiraling — and choose differently.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="standards-quote">
+        <p class="sq-text">
+          "After the Lab, you should be able to say: I no longer manage my reactions. I direct my life."
+        </p>
+        <p class="sq-sub">
+          The Sovereignty Collective does not punish reactivity. It studies it.<br><br>
+          Growth becomes boring. And boring is powerful. Stability under expansion — that is the outcome.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="closing">
+  <span class="closing-eyebrow reveal">The Invitation</span>
+  <div class="closing-divider reveal"></div>
+  <h2 class="reveal reveal-delay-1">
+    Govern yourself.<br>
+    <em>Precisely.</em>
+  </h2>
+  <p class="closing-sub reveal reveal-delay-2">
+    If structural sovereignty is your next evolution, you're welcome to apply.
+  </p>
+  <a class="btn-primary reveal reveal-delay-3" href="pages/application.html">Submit Your Application</a>
+  <p class="closing-note reveal reveal-delay-4">
+    This is not a decision to make quickly. It is a decision to make clearly. Applications are reviewed quarterly. No urgency. No persuasion. Just selection.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#"><span>T</span>he Sovereignty Collective</a>
+  <span class="footer-tagline">Psychological clarity · Emotional power · Spiritual sovereignty</span>
+  <div class="footer-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#tiers">The Lab</a>
+    <a href="#masterclass">Masterclass</a>
+    <a href="pages/application.html">Apply</a>
+  </div>
+</footer>
+
+<script>
+// ── NAVBAR SCROLL ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+},{ passive:true });
+
+// ── REVEAL ON SCROLL (iframe-safe) ──
+const reveals = document.querySelectorAll('.reveal');
+const isIframe = window.self !== window.top;
+if(!isIframe){
+  reveals.forEach(el => el.classList.add('animate-ready'));
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  },{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+  reveals.forEach(el=>observer.observe(el));
+}
+
+// ── TRANSLATIONS ──
+const T = {
+  en: {
+    'nav-apply-btn':'Apply',
+    'nav-link-philosophy':'Philosophy',
+    'nav-link-lab':'The Lab',
+    'nav-link-process':'Process',
+    'nav-link-masterclass':'Masterclass',
+    'hero-eyebrow':'Led by Angie Martin · Sovereignty Architect',
+    'hero-desc':'The Sovereignty Collective is a private identity recalibration environment for high-capacity individuals ready to eliminate emotional reactivity at the root — in their personal lives, their leadership, and their professional performance.',
+    'dual-label':'The Scope',
+    'dual-h2':'Personal evolution.<br><em>Professional sovereignty.</em>',
+    'dual-intro':'The same nervous system that reacts in a difficult conversation at home is the one that hesitates before a high-stakes decision at work. This work addresses both — because they are the same system.',
+    'dc1-label':'Personal Growth',
+    'dc1-h':'Reclaim your<br><em>inner authority.</em>',
+    'dc1-p':'Patterns formed in your personal history — relationships, family dynamics, emotional wounds — shape how you move through every area of life. Recalibration here is not therapy. It is structural identity work that rewrites the reactive loops at their root.',
+    'dc1-list':'<li>Emotional regulation in relationships</li><li>Breaking cycles of self-sabotage</li><li>Rebuilding trust in your own decisions</li><li>Expanding capacity for intimacy and visibility</li><li>Dissolving patterns inherited from past experiences</li>',
+    'dc2-label':'Professional Evolution',
+    'dc2-h':'Lead from<br><em>structural composure.</em>',
+    'dc2-p':'High performance without regulation produces burnout. Leaders, entrepreneurs, and executives who cannot regulate under pressure cannot sustain the level they are building toward. This work increases nervous system capacity for high-stakes environments — not through motivation, but through structural recalibration.',
+    'dc2-list':'<li>Decision-making under pressure without reactivity</li><li>Leading teams with regulated authority</li><li>Sustaining high performance without collapse</li><li>Eliminating imposter responses at expansion points</li><li>Building capacity for visibility and leadership at scale</li>',
+    'dual-bridge-text':'"Whether the challenge is personal or professional, the nervous system is the <strong>same gatekeeper.</strong> Sovereignty in one domain naturally expands into the other."',
+    'dual-pill-personal':'Personal Growth',
+    'dual-pill-professional':'Professional Evolution',
+    'hero-h1':'You are not<br><em>broken.</em><br>You are protecting.',
+    'hero-sub':'And protection is structural.',
+    'hero-desc':'The Sovereignty Collective is a private identity recalibration environment for high-capacity individuals ready to eliminate emotional reactivity at the root and operate from structural self-governance.',
+    'hero-btn-mc':'Attend the Masterclass',
+    'hero-btn-lab':'Explore the Lab',
+    'hero-scroll':'Scroll',
+    'phi-label':'The Foundation',
+    'phi-quote':'"Transformation is not mindset.<br><strong>It is nervous system capacity.</strong>"',
+    'phi-body1':'For too long, transformation has been sold as mindset work, manifestation rituals, or spiritual bypassing. But identity does not shift through affirmation. It shifts through integration.',
+    'phi-body2':'Your nervous system determines what you can hold: success, visibility, intimacy, expansion. When expansion feels unsafe, the body contracts. When contraction is misunderstood, people call it failure. It isn't failure. It's protection.',
+    'phi-body3':'My work is not about becoming someone new.<br>It is about recalibrating the system that decides who you are allowed to be.',
+    'phi-signature':'— Angie Martin',
+    'prob-label':'The Pattern',
+    'prob-h2':'You\'ve done the work.<br><em>The pattern remains.</em>',
+    'prob-desc':'If you are intelligent, self-aware, and ambitious — yet still find yourself repeating the same emotional reactions in your relationships, collapsing after expansion, or hesitating before high-stakes decisions at work — you are not lacking discipline. Your nervous system has not recalibrated to match the level you\'re trying to live and lead at.',
+    'prob-li1':'Pulling back before visibility',
+    'prob-li2':'Overworking before breakthrough',
+    'prob-li3':'Losing momentum after expansion',
+    'prob-li4':'Questioning yourself at the edge of growth',
+    'prob-li5':'Insight without behavioral shift',
+    'callout1':'"The nervous system is loyal to <strong>familiarity,</strong> not potential."',
+    'callout2':'"Identity is a prediction<br>the nervous system <strong>defends.</strong>"',
+    'callout-attr':'— Core Framework · The Sovereignty Collective',
+    'fw-label':'The Approach',
+    'fw-h2':'Regulation. Integration.<br><em>Structural Sovereignty.</em>',
+    'fw-desc':'The Circulation Model™ is a structured identity recalibration framework rooted in nervous system science, behavioral pattern analysis, and somatic integration. Not mystical. Not motivational. Structural.',
+    'p1-h':'Neutral Energy','p1-p':'Life force is raw potential shaped by attention, emotion, belief, and intention — not inherently positive or negative.',
+    'p2-h':'Directed Attention','p2-p':'Attention is the steering wheel of your energetic field. Where focus goes, energy organizes — amplifying contraction or expansion.',
+    'p3-h':'Activation Cycles','p3-p':'Contraction is not failure. It is compression before expansion. Resisting contraction blocks integration.',
+    'p4-h':'Somatic Charge','p4-p':'Unprocessed experience becomes stored charge in the body. Triggers are pockets of frozen energy asking to move.',
+    'p5-h':'Nervous System Capacity','p5-p':'The nervous system determines how much you can hold — joy, success, intimacy, visibility. This is capacity, not mindset.',
+    'p6-h':'Structural Integration','p6-p':'Energy must circulate. What is received must be processed. What is processed must be expressed. Stagnation is an incomplete cycle.',
+    'mc-tag':'Free · 60 Minutes',
+    'mc-h2':'<em>Why You\'re Still Reacting</em><br>Even After Doing the Work',
+    'mc-desc':'A structured 60-minute masterclass for high-capacity individuals who recognize their patterns but cannot stabilize beyond them. This is not motivational content. It is structural clarity.',
+    'mc-btn':'Reserve Your Place',
+    'mc-note':'Applications open quarterly. No urgency. No countdown.',
+    'mc-t1':'0–10','mc-s1':'Reframe the problem — reactivity is structural protection, not character failure',
+    'mc-t2':'10–25','mc-s2':'The mechanics — nervous system baseline, stored emotional charge, and the identity protection loop',
+    'mc-t3':'25–40','mc-s3':'Live reactivity mapping and micro-regulation practice — you will feel a shift',
+    'mc-t4':'40–50','mc-s4':'Why knowledge fails without integration and why high-capacity individuals struggle more',
+    'mc-t5':'50–60','mc-s5':'A measured invitation — no pressure, no persuasion, just structural clarity',
+    'proc-label':'The Recalibration Pathway',
+    'proc-h2':'Three stages.<br><em>One structural shift.</em>',
+    'proc-desc':'Insight is a map. Regulation is terrain stability. One informs. The other transforms.',
+    'st1-num':'Stage I','st1-h':'Awareness','st1-p':'Recognizing protection patterns in real time. Not analysis — observation. You see the reaction forming before it acts.',
+    'st2-num':'Stage II','st2-h':'Regulation','st2-p':'Increasing nervous system capacity under activation. Inserting space between stimulus and response. That space is sovereignty.',
+    'st3-num':'Stage III','st3-h':'Integration','st3-p':'Repeating expansion without collapse. Growth becomes stable. Not thrilling. Not terrifying. Just steady.',
+    'tiers-label':'The Containers',
+    'tiers-h2':'Two tiers.<br><em>One standard.</em>',
+    'tiers-desc':'Applications are required for both. Invitations are extended selectively. Depth demands readiness.',
+    't1-badge':'Tier I · Foundational',
+    't1-name':'Foundational Integration Track',
+    't1-dur':'6 Weeks · 75-min Weekly Sessions',
+    't1-desc':'A structured readiness environment for high-capacity individuals building nervous system regulation capacity before immersive recalibration. Not a starter program — a preparatory tier.',
+    't1-f1':'Emotional reactivity mapping','t1-f2':'Nervous system fundamentals and baseline regulation','t1-f3':'Pattern awareness and loop deconstruction','t1-f4':'Self-responsibility and internal governance training','t1-f5':'Boundary calibration under pressure','t1-f6':'Readiness assessment for the Lab',
+    't1-inv':'$1,500','t1-note':'Structured investment options available before Week Two','t1-btn':'Apply for Foundational Track',
+    't2-badge':'Tier II · Elite Immersive',
+    't2-name':'Identity Recalibration Lab',
+    't2-dur':'8 Weeks · 90-min Live Immersive Labs',
+    't2-desc':'A live identity recalibration lab for high-capacity individuals ready to eliminate emotional reactivity and operate from structural sovereignty. Strategic and elite. Sacred and precise.',
+    't2-f1':'Live advanced reactivity deconstruction','t2-f2':'Stored emotional charge extraction protocols','t2-f3':'Identity architecture audit and repatterning','t2-f4':'Decision precision and sovereignty protocols','t2-f5':'Boundary mastery under simulated pressure','t2-f6':'Personal sovereignty blueprint and stabilization',
+    't2-inv':'$4,500 – $6,000','t2-note':'12–16 participants · Application and invitation only','t2-btn':'Apply to the Lab',
+    'sel-label':'The Standard',
+    'sel-h2':'The Lab selects.<br><em>You apply.</em>',
+    'sel-desc':'Applications are reviewed. Invitations are extended to those aligned with the depth and self-responsibility required for this work. This is not exclusion — it is stewardship of the container.',
+    'cr1-label':'You may be ready if you','cr1-text':'Have prior development experience and can articulate your patterns clearly with self-responsibility — not blame.',
+    'cr2-label':'You may be ready if you','cr2-text':'Are willing to be interrupted in your patterns in real time without defensiveness or collapse.',
+    'cr3-label':'You may be ready if you','cr3-text':'Seek structural change over inspiration, and value regulated authority over emotional catharsis.',
+    'cr4-label':'This is not for those seeking','cr4-text':'Motivation, surface mindset work, emotional venting spaces, or transformation through inspiration alone.',
+    'sel-btn':'Submit Your Application',
+    'sel-fine':'Those not yet invited may be encouraged to reapply for a future cohort, or offered placement in the Foundational Track as a preparatory pathway.',
+    'std-label':'The Outcomes',
+    'std-h2':'What regulated<br><em>actually looks like.</em>',
+    's1-h':'Response Latency Control','s1-p':'You insert a conscious pause between stimulus and reaction — physiologically, not philosophically. Sovereignty lives in the milliseconds.',
+    's2-h':'Charge Completion Awareness','s2-p':'You process emotional activation without narrative collapse — not suppress, not dramatize, not dissociate.',
+    's3-h':'State-Independent Decision Making','s3-p':'You make decisions without catastrophizing, personalizing, or defaulting to old identity loops.',
+    's4-h':'Predictive Model Awareness','s4-p':'You catch your old patterns predicting — without shame, without spiraling — and choose differently.',
+    'sq-text':'"After the Lab, you should be able to say: I no longer manage my reactions. I direct my life."',
+    'sq-sub':'The Sovereignty Collective does not punish reactivity. It studies it.<br><br>Growth becomes boring. And boring is powerful. Stability under expansion — that is the outcome.',
+    'cta-eyebrow':'The Invitation',
+    'cta-h2':'Govern yourself.<br><em>Precisely.</em>',
+    'cta-sub':'If structural sovereignty is your next evolution, you\'re welcome to apply.',
+    'cta-btn':'Submit Your Application',
+    'cta-note':'This is not a decision to make quickly. It is a decision to make clearly. Applications are reviewed quarterly. No urgency. No persuasion. Just selection.',
+    'ft-tagline':'Psychological clarity · Emotional power · Spiritual sovereignty',
+    'ft-l1':'Philosophy','ft-l2':'The Lab','ft-l3':'Masterclass','ft-l4':'Apply',
+  },
+  pt: {
+    'nav-apply-btn':'Candidatar',
+    'nav-link-philosophy':'Filosofia',
+    'nav-link-lab':'O Lab',
+    'nav-link-process':'Processo',
+    'nav-link-masterclass':'Masterclass',
+    'hero-eyebrow':'Criado por Angie Martin · Arquiteta da Soberania',
+    'hero-desc':'O Sovereignty Collective é um ambiente privado de recalibração de identidade para indivíduos de alta capacidade prontos para eliminar a reatividade emocional pela raiz — em suas vidas pessoais, em sua liderança e em sua performance profissional.',
+    'dual-label':'O Escopo',
+    'dual-h2':'Evolução pessoal.<br><em>Soberania profissional.</em>',
+    'dual-intro':'O mesmo sistema nervoso que reage em uma conversa difícil em casa é o que hesita diante de uma decisão de alto risco no trabalho. Este trabalho endereça os dois — porque é o mesmo sistema.',
+    'dc1-label':'Crescimento Pessoal',
+    'dc1-h':'Recupere sua<br><em>autoridade interior.</em>',
+    'dc1-p':'Padrões formados em sua história pessoal — relacionamentos, dinâmicas familiares, feridas emocionais — moldam como você se move em todas as áreas da vida. A recalibração aqui não é terapia. É trabalho estrutural de identidade que reescreve os loops reativos em sua raiz.',
+    'dc1-list':'<li>Regulação emocional em relacionamentos</li><li>Quebra de ciclos de autossabotagem</li><li>Reconstrução da confiança nas próprias decisões</li><li>Expansão da capacidade para intimidade e visibilidade</li><li>Dissolução de padrões herdados de experiências passadas</li>',
+    'dc2-label':'Evolução Profissional',
+    'dc2-h':'Lidere a partir da<br><em>compostura estrutural.</em>',
+    'dc2-p':'Alta performance sem regulação produz burnout. Líderes, empreendedores e executivos que não conseguem se regular sob pressão não conseguem sustentar o nível que estão construindo. Este trabalho aumenta a capacidade do sistema nervoso para ambientes de alto risco — não por motivação, mas por recalibração estrutural.',
+    'dc2-list':'<li>Tomada de decisão sob pressão sem reatividade</li><li>Liderar equipes com autoridade regulada</li><li>Sustentar alta performance sem colapso</li><li>Eliminar respostas de impostora em pontos de expansão</li><li>Construir capacidade para visibilidade e liderança em escala</li>',
+    'dual-bridge-text':'"Seja o desafio pessoal ou profissional, o sistema nervoso é o mesmo <strong>guardião.</strong> A soberania em um domínio naturalmente se expande para o outro."',
+    'dual-pill-personal':'Crescimento Pessoal',
+    'dual-pill-professional':'Evolução Profissional',
+    'hero-h1':'Você não está<br><em>quebrada.</em><br>Você está se protegendo.',
+    'hero-sub':'E proteção é estrutural.',
+    'hero-desc':'O Sovereignty Collective é um ambiente privado de recalibração de identidade para indivíduos de alta capacidade prontos para eliminar a reatividade emocional pela raiz e operar a partir da autogovernança estrutural.',
+    'hero-btn-mc':'Participar da Masterclass',
+    'hero-btn-lab':'Explorar o Lab',
+    'hero-scroll':'Rolar',
+    'phi-label':'A Fundação',
+    'phi-quote':'"Transformação não é mentalidade.<br><strong>É capacidade do sistema nervoso.</strong>"',
+    'phi-body1':'Por muito tempo, transformação foi vendida como trabalho de mentalidade, rituais de manifestação ou bypass espiritual. Mas a identidade não muda por afirmação. Ela muda por integração.',
+    'phi-body2':'Seu sistema nervoso determina o que você consegue sustentar: sucesso, visibilidade, intimidade, expansão. Quando a expansão parece insegura, o corpo se contrai. Quando a contração é mal compreendida, as pessoas chamam de fracasso. Não é fracasso. É proteção.',
+    'phi-body3':'Meu trabalho não é sobre se tornar alguém novo.<br>É sobre recalibrar o sistema que decide quem você tem permissão de ser.',
+    'phi-signature':'— Angie Martin',
+    'prob-label':'O Padrão',
+    'prob-h2':'Você fez o trabalho.<br><em>O padrão permanece.</em>',
+    'prob-desc':'Se você é inteligente, consciente de si mesma e ambiciosa — mas ainda se encontra repetindo as mesmas reações emocionais nos seus relacionamentos, colapsando após expansão ou hesitando diante de decisões de alto risco no trabalho — você não está faltando disciplina. Seu sistema nervoso não se recalibrou para o nível em que você está tentando viver e liderar.',
+    'prob-li1':'Recuar antes da visibilidade',
+    'prob-li2':'Trabalhar demais antes do avanço',
+    'prob-li3':'Perder impulso após expansão',
+    'prob-li4':'Questionar a si mesma na beira do crescimento',
+    'prob-li5':'Insight sem mudança comportamental',
+    'callout1':'"O sistema nervoso é leal à <strong>familiaridade,</strong> não ao potencial."',
+    'callout2':'"Identidade é uma predição<br>que o sistema nervoso <strong>defende.</strong>"',
+    'callout-attr':'— Framework Central · The Sovereignty Collective',
+    'fw-label':'A Abordagem',
+    'fw-h2':'Regulação. Integração.<br><em>Soberania Estrutural.</em>',
+    'fw-desc':'O Modelo de Circulação™ é um framework estruturado de recalibração de identidade baseado em ciência do sistema nervoso, análise comportamental e integração somática. Não místico. Não motivacional. Estrutural.',
+    'p1-h':'Energia Neutra','p1-p':'Força vital é potencial bruto moldado por atenção, emoção, crença e intenção — não inerentemente positivo ou negativo.',
+    'p2-h':'Atenção Dirigida','p2-p':'Atenção é o volante do seu campo energético. Para onde vai o foco, a energia se organiza — amplificando contração ou expansão.',
+    'p3-h':'Ciclos de Ativação','p3-p':'Contração não é fracasso. É compressão antes da expansão. Resistir à contração bloqueia a integração.',
+    'p4-h':'Carga Somática','p4-p':'Experiência não processada se torna carga armazenada no corpo. Gatilhos são bolsões de energia congelada pedindo para se mover.',
+    'p5-h':'Capacidade do Sistema Nervoso','p5-p':'O sistema nervoso determina o quanto você consegue sustentar — alegria, sucesso, intimidade, visibilidade. Isso é capacidade, não mentalidade.',
+    'p6-h':'Integração Estrutural','p6-p':'A energia precisa circular. O que é recebido deve ser processado. O que é processado deve ser expresso. Estagnação é um ciclo incompleto.',
+    'mc-tag':'Gratuito · 60 Minutos',
+    'mc-h2':'<em>Por Que Você Ainda Reage</em><br>Mesmo Depois de Fazer o Trabalho',
+    'mc-desc':'Uma masterclass estruturada de 60 minutos para indivíduos de alta capacidade que reconhecem seus padrões mas não conseguem se estabilizar além deles. Não é conteúdo motivacional. É clareza estrutural.',
+    'mc-btn':'Reserve Seu Lugar',
+    'mc-note':'Inscrições abertas trimestralmente. Sem urgência. Sem contagem regressiva.',
+    'mc-t1':'0–10','mc-s1':'Reformular o problema — reatividade é proteção estrutural, não falha de caráter',
+    'mc-t2':'10–25','mc-s2':'A mecânica — linha de base do sistema nervoso, carga emocional armazenada e o loop de proteção de identidade',
+    'mc-t3':'25–40','mc-s3':'Mapeamento de reatividade ao vivo e prática de micro-regulação — você sentirá uma mudança',
+    'mc-t4':'40–50','mc-s4':'Por que o conhecimento falha sem integração e por que indivíduos de alta capacidade lutam mais',
+    'mc-t5':'50–60','mc-s5':'Um convite ponderado — sem pressão, sem persuasão, apenas clareza estrutural',
+    'proc-label':'O Caminho de Recalibração',
+    'proc-h2':'Três estágios.<br><em>Uma mudança estrutural.</em>',
+    'proc-desc':'Insight é um mapa. Regulação é estabilidade do terreno. Um informa. O outro transforma.',
+    'st1-num':'Estágio I','st1-h':'Consciência','st1-p':'Reconhecer padrões de proteção em tempo real. Não análise — observação. Você vê a reação se formando antes de agir.',
+    'st2-num':'Estágio II','st2-h':'Regulação','st2-p':'Aumentar a capacidade do sistema nervoso sob ativação. Inserir espaço entre estímulo e resposta. Esse espaço é soberania.',
+    'st3-num':'Estágio III','st3-h':'Integração','st3-p':'Repetir expansão sem colapso. O crescimento se torna estável. Não emocionante. Não aterrorizante. Apenas firme.',
+    'tiers-label':'Os Containers',
+    'tiers-h2':'Dois níveis.<br><em>Um padrão.</em>',
+    'tiers-desc':'Candidaturas são exigidas para ambos. Convites são estendidos seletivamente. Profundidade exige prontidão.',
+    't1-badge':'Nível I · Fundacional',
+    't1-name':'Trilha de Integração Fundacional',
+    't1-dur':'6 Semanas · Sessões Semanais de 75 min',
+    't1-desc':'Um ambiente estruturado de prontidão para indivíduos de alta capacidade construindo capacidade de regulação do sistema nervoso antes da recalibração imersiva. Não é um programa iniciante — é um nível preparatório.',
+    't1-f1':'Mapeamento de reatividade emocional','t1-f2':'Fundamentos do sistema nervoso e regulação basal','t1-f3':'Consciência de padrões e desconstrução de loops','t1-f4':'Treinamento de autorresponsabilidade e governança interna','t1-f5':'Calibração de limites sob pressão','t1-f6':'Avaliação de prontidão para o Lab',
+    't1-inv':'$1.500','t1-note':'Opções de investimento estruturadas disponíveis antes da Semana Dois','t1-btn':'Candidatar para a Trilha Fundacional',
+    't2-badge':'Nível II · Imersivo Elite',
+    't2-name':'Lab de Recalibração de Identidade',
+    't2-dur':'8 Semanas · Labs Imersivos ao Vivo de 90 min',
+    't2-desc':'Um lab imersivo de recalibração de identidade para indivíduos de alta capacidade prontos para eliminar a reatividade emocional e operar a partir da soberania estrutural. Estratégico e de elite. Sagrado e preciso.',
+    't2-f1':'Desconstrução avançada de reatividade ao vivo','t2-f2':'Protocolos de extração de carga emocional armazenada','t2-f3':'Auditoria e reprogramação da arquitetura de identidade','t2-f4':'Precisão de decisão e protocolos de soberania','t2-f5':'Maestria de limites sob pressão simulada','t2-f6':'Blueprint pessoal de soberania e estabilização',
+    't2-inv':'$4.500 – $6.000','t2-note':'12–16 participantes · Candidatura e convite apenas','t2-btn':'Candidatar ao Lab',
+    'sel-label':'O Padrão',
+    'sel-h2':'O Lab seleciona.<br><em>Você se candidata.</em>',
+    'sel-desc':'As candidaturas são revisadas. Convites são estendidos àqueles alinhados com a profundidade e a autorresponsabilidade exigidas por este trabalho. Isso não é exclusão — é administração do container.',
+    'cr1-label':'Você pode estar pronta se','cr1-text':'Tem experiência anterior em desenvolvimento e consegue articular seus padrões com clareza e autorresponsabilidade — não culpa.',
+    'cr2-label':'Você pode estar pronta se','cr2-text':'Está disposta a ser interrompida em seus padrões em tempo real sem defensividade ou colapso.',
+    'cr3-label':'Você pode estar pronta se','cr3-text':'Busca mudança estrutural acima de inspiração, e valoriza autoridade regulada acima de catarse emocional.',
+    'cr4-label':'Isso não é para quem busca','cr4-text':'Motivação, trabalho superficial de mentalidade, espaços de desabafo emocional ou transformação apenas por inspiração.',
+    'sel-btn':'Enviar sua Candidatura',
+    'sel-fine':'Aqueles ainda não convidados podem ser encorajados a se recandidatar para uma futura coorte, ou receber uma vaga na Trilha Fundacional como caminho preparatório.',
+    'std-label':'Os Resultados',
+    'std-h2':'O que regulado<br><em>realmente significa.</em>',
+    's1-h':'Controle de Latência de Resposta','s1-p':'Você insere uma pausa consciente entre estímulo e reação — fisiologicamente, não filosoficamente. A soberania vive nos milissegundos.',
+    's2-h':'Consciência de Conclusão de Carga','s2-p':'Você processa ativação emocional sem colapso narrativo — não suprime, não dramatiza, não dissocia.',
+    's3-h':'Tomada de Decisão Independente de Estado','s3-p':'Você toma decisões sem catastrofizar, personalizar ou recorrer a loops de identidade antigos.',
+    's4-h':'Consciência do Modelo Preditivo','s4-p':'Você percebe seus antigos padrões fazendo previsões — sem vergonha, sem espiralar — e escolhe diferente.',
+    'sq-text':'"Após o Lab, você deve ser capaz de dizer: Eu não gerencio mais minhas reações. Eu dirijo minha vida."',
+    'sq-sub':'O Sovereignty Collective não pune a reatividade. Ele a estuda.<br><br>O crescimento se torna entediante. E entediante é poderoso. Estabilidade sob expansão — esse é o resultado.',
+    'cta-eyebrow':'O Convite',
+    'cta-h2':'Governe a si mesma.<br><em>Com precisão.</em>',
+    'cta-sub':'Se a soberania estrutural é sua próxima evolução, você é bem-vinda para se candidatar.',
+    'cta-btn':'Enviar sua Candidatura',
+    'cta-note':'Esta não é uma decisão para tomar rapidamente. É uma decisão para tomar com clareza. Candidaturas são revisadas trimestralmente. Sem urgência. Sem persuasão. Apenas seleção.',
+    'ft-tagline':'Clareza psicológica · Poder emocional · Soberania espiritual',
+    'ft-l1':'Filosofia','ft-l2':'O Lab','ft-l3':'Masterclass','ft-l4':'Candidatar',
+  }
+};
+
+// Map of element id / selector → key
+const MAP = [
+  ['#nav-apply-btn','nav-apply-btn','html'],
+  ['nav ul li:nth-child(1) a','nav-link-philosophy','html'],
+  ['nav ul li:nth-child(2) a','nav-link-lab','html'],
+  ['nav ul li:nth-child(3) a','nav-link-process','html'],
+  ['nav ul li:nth-child(4) a','nav-link-masterclass','html'],
+  ['.hero-eyebrow','hero-eyebrow','html'],
+  ['.hero h1','hero-h1','html'],
+  ['.hero-sub','hero-sub','html'],
+  ['.hero-desc','hero-desc','html'],
+  ['.hero-actions a:nth-child(1)','hero-btn-mc','html'],
+  ['.hero-actions a:nth-child(2)','hero-btn-lab','html'],
+  ['.scroll-hint span','hero-scroll','html'],
+  ['#dual-label','dual-label','html'],
+  ['#dual-h2','dual-h2','html'],
+  ['#dual-intro','dual-intro','html'],
+  ['#dc1-label','dc1-label','html'],
+  ['#dc1-h','dc1-h','html'],
+  ['#dc1-p','dc1-p','html'],
+  ['#dc1-list','dc1-list','html'],
+  ['#dc2-label','dc2-label','html'],
+  ['#dc2-h','dc2-h','html'],
+  ['#dc2-p','dc2-p','html'],
+  ['#dc2-list','dc2-list','html'],
+  ['#dual-bridge-text','dual-bridge-text','html'],
+  ['#dual-pill-personal','dual-pill-personal','html'],
+  ['#dual-pill-professional','dual-pill-professional','html'],
+  ['.philosophy .section-label','phi-label','html'],
+  ['.philosophy-quote','phi-quote','html'],
+  ['.philosophy-body:nth-of-type(1)','phi-body1','html'],
+  ['.philosophy-body:nth-of-type(2)','phi-body2','html'],
+  ['.philosophy-body:nth-of-type(3)','phi-body3','html'],
+  ['#phi-signature','phi-signature','html'],
+  ['.problem .section-label','prob-label','html'],
+  ['.problem .section-heading','prob-h2','html'],
+  ['.problem > div > p','prob-desc','html'],
+  ['.problem-list li:nth-child(1)','prob-li1','html'],
+  ['.problem-list li:nth-child(2)','prob-li2','html'],
+  ['.problem-list li:nth-child(3)','prob-li3','html'],
+  ['.problem-list li:nth-child(4)','prob-li4','html'],
+  ['.problem-list li:nth-child(5)','prob-li5','html'],
+  ['.callout-text:nth-of-type(1)','callout1','html'],
+  ['.callout-text:nth-of-type(2)','callout2','html'],
+  ['.callout-attr','callout-attr','html'],
+  ['.framework .section-label','fw-label','html'],
+  ['.framework .section-heading','fw-h2','html'],
+  ['.framework .container > p','fw-desc','html'],
+  ['.pillar:nth-child(1) h3','p1-h','html'],['.pillar:nth-child(1) p','p1-p','html'],
+  ['.pillar:nth-child(2) h3','p2-h','html'],['.pillar:nth-child(2) p','p2-p','html'],
+  ['.pillar:nth-child(3) h3','p3-h','html'],['.pillar:nth-child(3) p','p3-p','html'],
+  ['.pillar:nth-child(4) h3','p4-h','html'],['.pillar:nth-child(4) p','p4-p','html'],
+  ['.pillar:nth-child(5) h3','p5-h','html'],['.pillar:nth-child(5) p','p5-p','html'],
+  ['.pillar:nth-child(6) h3','p6-h','html'],['.pillar:nth-child(6) p','p6-p','html'],
+  ['.mc-tag','mc-tag','html'],
+  ['.masterclass h2','mc-h2','html'],
+  ['.mc-desc','mc-desc','html'],
+  ['.masterclass .btn-primary','mc-btn','html'],
+  ['.mc-note','mc-note','html'],
+  ['.mc-outline li:nth-child(1) .mc-time','mc-t1','html'],
+  ['.mc-outline li:nth-child(1) .mc-topic','mc-s1','html'],
+  ['.mc-outline li:nth-child(2) .mc-time','mc-t2','html'],
+  ['.mc-outline li:nth-child(2) .mc-topic','mc-s2','html'],
+  ['.mc-outline li:nth-child(3) .mc-time','mc-t3','html'],
+  ['.mc-outline li:nth-child(3) .mc-topic','mc-s3','html'],
+  ['.mc-outline li:nth-child(4) .mc-time','mc-t4','html'],
+  ['.mc-outline li:nth-child(4) .mc-topic','mc-s4','html'],
+  ['.mc-outline li:nth-child(5) .mc-time','mc-t5','html'],
+  ['.mc-outline li:nth-child(5) .mc-topic','mc-s5','html'],
+  ['.process .section-label','proc-label','html'],
+  ['.process h2','proc-h2','html'],
+  ['.process > div > p','proc-desc','html'],
+  ['.stage:nth-child(1) .stage-num','st1-num','html'],
+  ['.stage:nth-child(1) h3','st1-h','html'],
+  ['.stage:nth-child(1) p','st1-p','html'],
+  ['.stage:nth-child(2) .stage-num','st2-num','html'],
+  ['.stage:nth-child(2) h3','st2-h','html'],
+  ['.stage:nth-child(2) p','st2-p','html'],
+  ['.stage:nth-child(3) .stage-num','st3-num','html'],
+  ['.stage:nth-child(3) h3','st3-h','html'],
+  ['.stage:nth-child(3) p','st3-p','html'],
+  ['.tiers .section-label','tiers-label','html'],
+  ['.tiers h2','tiers-h2','html'],
+  ['.tiers > div > p','tiers-desc','html'],
+  ['.tier-card:nth-child(1) .tier-badge','t1-badge','html'],
+  ['.tier-card:nth-child(1) h3','t1-name','html'],
+  ['.tier-card:nth-child(1) .tier-duration','t1-dur','html'],
+  ['.tier-card:nth-child(1) .tier-desc','t1-desc','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(1)','t1-f1','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(2)','t1-f2','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(3)','t1-f3','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(4)','t1-f4','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(5)','t1-f5','html'],
+  ['.tier-card:nth-child(1) .tier-features li:nth-child(6)','t1-f6','html'],
+  ['.tier-card:nth-child(1) .tier-investment','t1-inv','html'],
+  ['.tier-card:nth-child(1) .tier-note','t1-note','html'],
+  ['.tier-card:nth-child(1) .tier-apply-btn','t1-btn','html'],
+  ['.tier-card:nth-child(2) .tier-badge','t2-badge','html'],
+  ['.tier-card:nth-child(2) h3','t2-name','html'],
+  ['.tier-card:nth-child(2) .tier-duration','t2-dur','html'],
+  ['.tier-card:nth-child(2) .tier-desc','t2-desc','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(1)','t2-f1','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(2)','t2-f2','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(3)','t2-f3','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(4)','t2-f4','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(5)','t2-f5','html'],
+  ['.tier-card:nth-child(2) .tier-features li:nth-child(6)','t2-f6','html'],
+  ['.tier-card:nth-child(2) .tier-investment','t2-inv','html'],
+  ['.tier-card:nth-child(2) .tier-note','t2-note','html'],
+  ['.tier-card:nth-child(2) .tier-apply-btn','t2-btn','html'],
+  ['.selection .section-label','sel-label','html'],
+  ['.selection h2','sel-h2','html'],
+  ['.selection-desc','sel-desc','html'],
+  ['.criteria-item:nth-child(1) .criteria-label','cr1-label','html'],
+  ['.criteria-item:nth-child(1) .criteria-text','cr1-text','html'],
+  ['.criteria-item:nth-child(2) .criteria-label','cr2-label','html'],
+  ['.criteria-item:nth-child(2) .criteria-text','cr2-text','html'],
+  ['.criteria-item:nth-child(3) .criteria-label','cr3-label','html'],
+  ['.criteria-item:nth-child(3) .criteria-text','cr3-text','html'],
+  ['.criteria-item:nth-child(4) .criteria-label','cr4-label','html'],
+  ['.criteria-item:nth-child(4) .criteria-text','cr4-text','html'],
+  ['.selection .btn-primary','sel-btn','html'],
+  ['.selection > p:last-child','sel-fine','html'],
+  ['.standards .section-label','std-label','html'],
+  ['.standards .section-heading','std-h2','html'],
+  ['.standards-list li:nth-child(1) h4','s1-h','html'],
+  ['.standards-list li:nth-child(1) p','s1-p','html'],
+  ['.standards-list li:nth-child(2) h4','s2-h','html'],
+  ['.standards-list li:nth-child(2) p','s2-p','html'],
+  ['.standards-list li:nth-child(3) h4','s3-h','html'],
+  ['.standards-list li:nth-child(3) p','s3-p','html'],
+  ['.standards-list li:nth-child(4) h4','s4-h','html'],
+  ['.standards-list li:nth-child(4) p','s4-p','html'],
+  ['.sq-text','sq-text','html'],
+  ['.sq-sub','sq-sub','html'],
+  ['.closing-eyebrow','cta-eyebrow','html'],
+  ['.closing h2','cta-h2','html'],
+  ['.closing-sub','cta-sub','html'],
+  ['.closing .btn-primary','cta-btn','html'],
+  ['.closing-note','cta-note','html'],
+  ['.footer-tagline','ft-tagline','html'],
+  ['.footer-links a:nth-child(1)','ft-l1','html'],
+  ['.footer-links a:nth-child(2)','ft-l2','html'],
+  ['.footer-links a:nth-child(3)','ft-l3','html'],
+  ['.footer-links a:nth-child(4)','ft-l4','html'],
+];
+
+let currentLang = 'en';
+
+function setLang(lang){
+  currentLang = lang;
+
+  // Toggle active flag buttons
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
+
+  const dict = T[lang];
+  MAP.forEach(([sel, key])=>{
+    const el = document.querySelector(sel);
+    if(!el || !dict[key]) return;
+    el.innerHTML = dict[key];
+  });
+
+  // Update html lang attribute
+  document.documentElement.lang = lang==='pt' ? 'pt-BR' : 'en';
+
+  // Update page title
+  document.title = 'The Sovereignty Collective — Angie Martin';
+}
+
+// ── WIRE LANGUAGE BUTTONS ──
+document.addEventListener('DOMContentLoaded', function(){
+  var btnEn = document.getElementById('btn-en');
+  var btnPt = document.getElementById('btn-pt');
+  if(btnEn) btnEn.addEventListener('click', function(){ setLang('en'); });
+  if(btnPt) btnPt.addEventListener('click', function(){ setLang('pt'); });
+});
+
+// Also wire immediately in case DOMContentLoaded already fired
+(function(){
+  var btnEn = document.getElementById('btn-en');
+  var btnPt = document.getElementById('btn-pt');
+  if(btnEn) btnEn.addEventListener('click', function(){ setLang('en'); });
+  if(btnPt) btnPt.addEventListener('click', function(){ setLang('pt'); });
+})();
+</script>
+<script>
+// ── PAGE VIEW TRACKING ──
+(function(){
+  const SB_URL  = 'https://btvaccofypcehaqxaxme.supabase.co';
+  const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dmFjY29meXBjZWhhcXhheG1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MzU2OTksImV4cCI6MjA4OTExMTY5OX0.55tDhqLFw4_fobaolaDVVPPn3lIh2JTOv86_tyV4syc';
+  window.addEventListener('load', function(){
+    fetch(SB_URL + '/rest/v1/page_views', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'apikey': SB_ANON, 'Authorization':'Bearer '+SB_ANON, 'Prefer':'return=minimal' },
+      body: JSON.stringify({ page:'home', lang: document.documentElement.lang||'en', referrer: document.referrer||null, user_agent: navigator.userAgent||null })
+    }).catch(function(){});
+  });
+})();
+</script>
+</body>
+</html>
